@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='android-template-MVVM-project'
+rootProject.name='mukatukha-drinks'
