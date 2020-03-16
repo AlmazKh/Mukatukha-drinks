@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "654790994835",
+    "firebase_url": "https://mukatukha-drinks.firebaseio.com",
+    "project_id": "mukatukha-drinks",
+    "storage_bucket": "mukatukha-drinks.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654790994835:android:bef759bfb4f18367ad5666",
+        "android_client_info": {
+          "package_name": "com.almaz.mukatukha_drinks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654790994835-1focoba74vlsk2e48in7q4davcrr2vni.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.almaz.mukatukha_drinks",
+            "certificate_hash": "c914fcd12afc6460a7e3e6a385e6a9deebb7df75"
+          }
+        },
+        {
+          "client_id": "654790994835-56kkosqeuuo44hj3u124k5gn144kidns.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH7roBnYRqrsJZmMoBkGWqXSG6L-dRVew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654790994835-56kkosqeuuo44hj3u124k5gn144kidns.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
