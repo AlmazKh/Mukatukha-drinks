@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<!--    TODO add navigation items here-->
-   <!-- <item
-        android:id="@+id/navigation_map"
-        android:icon="@drawable/map_btn_icon"
-        android:title="@string/map_page_title" />-->
+    <item
+        android:id="@+id/navigation_cafe"
+        android:icon="@drawable/ic_nav_cafe"
+        android:title="@string/cafe_page_title" />
 
+    <item
+        android:id="@+id/navigation_basket"
+        android:icon="@drawable/ic_nav_basket"
+        android:title="@string/basket_page_title" />
+
+    <item
+        android:id="@+id/navigation_notification"
+        android:icon="@drawable/ic_nav_notification"
+        android:title="@string/notification_page_title" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_nav_profile"
+        android:title="@string/profile_page_title" />
 </menu>

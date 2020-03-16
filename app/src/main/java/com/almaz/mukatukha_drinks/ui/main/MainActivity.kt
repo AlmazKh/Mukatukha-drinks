@@ -7,6 +7,10 @@ import com.almaz.mukatukha_drinks.App
 import com.almaz.mukatukha_drinks.R
 import com.almaz.mukatukha_drinks.ui.base.BaseActivity
 import com.almaz.itis_booking.utils.ViewModelFactory
+import com.almaz.mukatukha_drinks.ui.basket.BasketFragment
+import com.almaz.mukatukha_drinks.ui.cafe.CafeFragment
+import com.almaz.mukatukha_drinks.ui.notification.NotificationFragment
+import com.almaz.mukatukha_drinks.ui.profile.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -36,11 +40,18 @@ class MainActivity : BaseActivity() {
     private val onNavigationItemSelectedListener =
             BottomNavigationView.OnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
-                    // TODO add items into menu
-                    /** /Just example
-                    R.id.navigation_map -> {
-                    navigateTo(MapFragment.toString(), null)
-                    }*/
+                    R.id.navigation_cafe -> {
+                        navigateTo(CafeFragment.toString(), null)
+                    }
+                    R.id.navigation_basket -> {
+                        navigateTo(BasketFragment.toString(), null)
+                    }
+                    R.id.navigation_notification -> {
+                        navigateTo(NotificationFragment.toString(), null)
+                    }
+                    R.id.navigation_profile -> {
+                        navigateTo(ProfileFragment.toString(), null)
+                    }
                     else -> {
                         return@OnNavigationItemSelectedListener false
                     }
@@ -51,14 +62,30 @@ class MainActivity : BaseActivity() {
     fun navigateTo(fragment: String, arguments: Bundle?) {
         val transaction = supportFragmentManager.beginTransaction()
         when (fragment) {
-            // TODO add fragments
-            /** /Just example
-            MapFragment.toString() -> {
-            transaction.replace(
-            R.id.main_container,
-            MapFragment.newInstance()
-            )
-            }*/
+            CafeFragment.toString() -> {
+                transaction.replace(
+                        R.id.main_container,
+                        CafeFragment.newInstance()
+                )
+            }
+            BasketFragment.toString() -> {
+                transaction.replace(
+                        R.id.main_container,
+                        BasketFragment.newInstance()
+                )
+            }
+            NotificationFragment.toString() -> {
+                transaction.replace(
+                        R.id.main_container,
+                        NotificationFragment.newInstance()
+                )
+            }
+            ProfileFragment.toString() -> {
+                transaction.replace(
+                        R.id.main_container,
+                        ProfileFragment.newInstance()
+                )
+            }
         }
         transaction.addToBackStack(null)
         transaction.commit()
@@ -90,11 +117,18 @@ class MainActivity : BaseActivity() {
 
     private fun setBottomNavSelectedItem(fragment: Fragment?) {
         when (fragment) {
-            // TODO add navigation item
-            /** /Just example
-            is MapFragment -> {
-            navigation.selectedItemId = R.id.navigation_map
-            }*/
+            is CafeFragment -> {
+                navigation.selectedItemId = R.id.navigation_cafe
+            }
+            is BasketFragment -> {
+                navigation.selectedItemId = R.id.navigation_basket
+            }
+            is NotificationFragment -> {
+                navigation.selectedItemId = R.id.navigation_notification
+            }
+            is ProfileFragment -> {
+                navigation.selectedItemId = R.id.navigation_profile
+            }
         }
     }
 }
