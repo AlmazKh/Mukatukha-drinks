@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">mukatukha-drinks</string>
     <string name="cafe_page_title">Cafe</string>
+    <string name="special_offer_page_title">Special offers</string>
     <string name="basket_page_title">Basket</string>
     <string name="notification_page_title">Notification</string>
     <string name="profile_page_title">Profile</string>

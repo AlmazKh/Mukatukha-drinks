@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/cafeFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/cafeFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.cafe.CafeFragment"
+        android:label="fragment_cafe"
+        tools:layout="@layout/fragment_cafe">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/specialOfferFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.special_offer.SpecialOfferFragment"
+        android:label="fragment_special_offer"
+        tools:layout="@layout/fragment_special_offer">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/basketFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.basket.BasketFragment"
+        android:label="fragment_basket"
+        tools:layout="@layout/fragment_basket">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.notification.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+</navigation>

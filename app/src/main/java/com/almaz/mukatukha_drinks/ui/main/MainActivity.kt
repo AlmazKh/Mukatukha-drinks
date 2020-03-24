@@ -6,6 +6,8 @@ import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.almaz.itis_booking.utils.ViewModelFactory
 import com.almaz.mukatukha_drinks.App
 import com.almaz.mukatukha_drinks.R
@@ -25,6 +27,8 @@ class MainActivity : BaseActivity() {
     lateinit var viewModeFactory: ViewModelFactory
     private lateinit var viewModel: MainViewModel
 
+    val navController by lazy { findNavController(R.id.nav_host_fragment) }
+
     override val layoutId: Int
         get() = R.layout.activity_main
 
@@ -36,7 +40,7 @@ class MainActivity : BaseActivity() {
 
     override fun setupView() {
         setSupportActionBar(toolbar)
-        navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        bottom_nav?.setupWithNavController(navController)
         viewModel = ViewModelProvider(this, this.viewModeFactory)
                 .get(MainViewModel::class.java)
 
@@ -48,114 +52,12 @@ class MainActivity : BaseActivity() {
             viewModel.isLoginedLiveData.observe(this, Observer { response ->
                 if (response.data != null) {
                     if (response.data) {
-                        navigation.selectedItemId = R.id.navigation_profile
-                        navigateTo(ProfileFragment.toString(), null)
+                        navController.navigate(R.id.action_loginFragment_to_profileFragment)
                     } else {
-                        navigateTo(LoginFragment.toString(), null)
+                        navController.navigate(R.id.loginFragment)
                     }
                 }
             })
-
-    private val onNavigationItemSelectedListener =
-            BottomNavigationView.OnNavigationItemSelectedListener { item ->
-                when (item.itemId) {
-                    R.id.navigation_cafe -> {
-                        navigateTo(CafeFragment.toString(), null)
-                    }
-                    R.id.navigation_basket -> {
-                        navigateTo(BasketFragment.toString(), null)
-                    }
-                    R.id.navigation_notification -> {
-                        navigateTo(NotificationFragment.toString(), null)
-                    }
-                    R.id.navigation_profile -> {
-                        navigateTo(ProfileFragment.toString(), null)
-                    }
-                    else -> {
-                        return@OnNavigationItemSelectedListener false
-                    }
-                }
-                return@OnNavigationItemSelectedListener true
-            }
-
-    fun navigateTo(fragment: String, arguments: Bundle?) {
-        val transaction = supportFragmentManager.beginTransaction()
-        when (fragment) {
-            CafeFragment.toString() -> {
-                transaction.replace(
-                        R.id.main_container,
-                        CafeFragment.newInstance()
-                )
-            }
-            BasketFragment.toString() -> {
-                transaction.replace(
-                        R.id.main_container,
-                        BasketFragment.newInstance()
-                )
-            }
-            NotificationFragment.toString() -> {
-                transaction.replace(
-                        R.id.main_container,
-                        NotificationFragment.newInstance()
-                )
-            }
-            ProfileFragment.toString() -> {
-                transaction.replace(
-                        R.id.main_container,
-                        ProfileFragment.newInstance()
-                )
-            }
-            LoginFragment.toString() -> {
-                transaction.replace(
-                        R.id.main_container,
-                        LoginFragment.newInstance()
-                )
-            }
-        }
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
-
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount > 0) {
-            supportFragmentManager.popBackStack()
-            getTopFragment()?.let {
-                supportFragmentManager.beginTransaction()
-                        .remove(it)
-                        .commitNow()
-            }
-            setBottomNavSelectedItem(getTopFragment())
-        } else {
-            super.onBackPressed()
-        }
-    }
-
-    private fun getTopFragment(): Fragment? {
-        val fragmentList = supportFragmentManager.fragments
-        var top: Fragment? = null
-        for (i in fragmentList.indices.reversed()) {
-            top = fragmentList[i] as Fragment
-            return top
-        }
-        return top
-    }
-
-    private fun setBottomNavSelectedItem(fragment: Fragment?) {
-        when (fragment) {
-            is CafeFragment -> {
-                navigation.selectedItemId = R.id.navigation_cafe
-            }
-            is BasketFragment -> {
-                navigation.selectedItemId = R.id.navigation_basket
-            }
-            is NotificationFragment -> {
-                navigation.selectedItemId = R.id.navigation_notification
-            }
-            is ProfileFragment -> {
-                navigation.selectedItemId = R.id.navigation_profile
-            }
-        }
-    }
 
     fun showLoading(show: Boolean) {
         if (show) {
