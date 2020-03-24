@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_login_page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal_16"
+        android:layout_marginTop="@dimen/spacing_small_8"
+        android:text="@string/text_enter"
+        android:textSize="@dimen/font_large_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_login_by_phone_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal_16"
+        android:layout_marginTop="@dimen/spacing_small_8"
+        android:layout_marginEnd="@dimen/spacing_normal_16"
+        android:text="@string/text_login_by_phone_description"
+        android:textSize="@dimen/font_normal_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_login_page_title" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal_16"
+        android:layout_marginTop="@dimen/spacing_small_8"
+        android:layout_marginEnd="@dimen/spacing_normal_16"
+        app:endIconContentDescription="@string/end_icon_content_description"
+        app:endIconDrawable="@drawable/ic_nav_profile"
+        app:endIconMode="custom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_login_by_phone_title">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:freezesText="true"
+            android:text="@string/text_default_phone_start_7" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_login_by_google"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="@dimen/spacing_normal_16"
+        android:layout_marginTop="@dimen/spacing_normal_16"
+        android:layout_marginEnd="@dimen/spacing_normal_16"
+        android:text="@string/btn_text_enter_by_google"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout" />
+</androidx.constraintlayout.widget.ConstraintLayout>

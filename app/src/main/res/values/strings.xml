@@ -4,4 +4,14 @@
     <string name="basket_page_title">Basket</string>
     <string name="notification_page_title">Notification</string>
     <string name="profile_page_title">Profile</string>
+
+    <string name="web_client_id">654790994835-56kkosqeuuo44hj3u124k5gn144kidns.apps.googleusercontent.com</string>
+
+    <string name="snackbar_error_message">Произошла ошибка</string>
+
+    <string name="text_enter">Вход</string>
+    <string name="text_login_by_phone_description">Введите номер телефона, чтобы войти или зарегистрироваться</string>
+    <string name="end_icon_content_description">Tab to enter</string>
+    <string name="text_default_phone_start_7">+7</string>
+    <string name="btn_text_enter_by_google">Войти с помощью Google</string>
 </resources>

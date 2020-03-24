@@ -3,6 +3,7 @@ package com.almaz.mukatukha_drinks.di.component
 import androidx.appcompat.app.AppCompatActivity
 import com.almaz.mukatukha_drinks.di.module.AuthModule
 import com.almaz.mukatukha_drinks.di.scope.ScreenScope
+import com.almaz.mukatukha_drinks.ui.login.LoginFragment
 import dagger.BindsInstance
 import dagger.Subcomponent
 
@@ -22,8 +23,5 @@ interface AuthComponent {
         fun build(): AuthComponent
     }
 
-/*  TODO add some inject activities or fragment methods
-     /Just example
-    fun inject(loginActivity: LoginActivity)
-*/
+    fun inject(loginFragment: LoginFragment)
 }
