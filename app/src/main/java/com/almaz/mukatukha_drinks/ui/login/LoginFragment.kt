@@ -84,10 +84,16 @@ class LoginFragment : BaseFragment() {
     private fun processLoginState(renderState: LoginState) {
         rootActivity.showLoading(false)
         when (renderState) {
-            LoginState.SUCCESS_LOGIN -> rootActivity.navController
-                .navigate(R.id.action_loginFragment_to_profileFragment)
-            LoginState.SUCCESS_REGISTER -> rootActivity.navController
-                .navigate(R.id.action_loginFragment_to_profileFragment)
+            LoginState.SUCCESS_LOGIN -> {
+                showSnackbar("Welcome back to Mukatukha Drinks!")
+                rootActivity.navController
+                    .navigate(R.id.action_loginFragment_to_profileFragment)
+            }
+            LoginState.SUCCESS_REGISTER -> {
+                showSnackbar("Welcome to Mukatukha Drinks!")
+                rootActivity.navController
+                    .navigate(R.id.action_loginFragment_to_profileFragment)
+            }
             LoginState.ERROR -> view?.let {
                 showSnackbar(getString(R.string.snackbar_error_message))
             }

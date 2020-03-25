@@ -43,21 +43,7 @@ class MainActivity : BaseActivity() {
         bottom_nav?.setupWithNavController(navController)
         viewModel = ViewModelProvider(this, this.viewModeFactory)
                 .get(MainViewModel::class.java)
-
-        viewModel.checkAuthUser()
-        observeIsLoginedLiveData()
     }
-
-    private fun observeIsLoginedLiveData() =
-            viewModel.isLoginedLiveData.observe(this, Observer { response ->
-                if (response.data != null) {
-                    if (response.data) {
-                        navController.navigate(R.id.action_loginFragment_to_profileFragment)
-                    } else {
-                        navController.navigate(R.id.loginFragment)
-                    }
-                }
-            })
 
     fun showLoading(show: Boolean) {
         if (show) {

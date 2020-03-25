@@ -3,6 +3,7 @@ package com.almaz.mukatukha_drinks.di.module
 import androidx.lifecycle.ViewModel
 import com.almaz.mukatukha_drinks.ui.login.LoginViewModel
 import com.almaz.mukatukha_drinks.ui.main.MainViewModel
+import com.almaz.mukatukha_drinks.ui.profile.ProfileViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -21,6 +22,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MainViewModel::class)
     abstract fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel::class)
+    abstract fun bindProfileViewModel(profileViewModel: ProfileViewModel): ViewModel
 }
 
 @Target(

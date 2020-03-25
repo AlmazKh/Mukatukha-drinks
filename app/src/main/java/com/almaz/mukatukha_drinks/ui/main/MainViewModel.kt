@@ -8,25 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
 class MainViewModel
-@Inject constructor(
-        private val loginInteractor: LoginInteractor
-) : BaseViewModel() {
+@Inject constructor() : BaseViewModel() {
 
-    val isLoginedLiveData = MutableLiveData<Response<Boolean>>()
 
-    fun checkAuthUser() {
-        disposables.add(
-                loginInteractor.checkAuthUser()
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({
-                            if (it) {
-                                isLoginedLiveData.value = Response.success(true)
-                            } else {
-                                isLoginedLiveData.value = Response.success(false)
-                            }
-                        }, {
-                            it.printStackTrace()
-                        })
-        )
-    }
 }

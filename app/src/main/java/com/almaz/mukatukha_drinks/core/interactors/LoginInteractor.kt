@@ -11,10 +11,6 @@ class LoginInteractor
 @Inject constructor(
         private val userRepository: UserRepository
 ) {
-    fun checkAuthUser(): Single<Boolean> =
-            userRepository.checkAuthUser()
-                    .subscribeOn(Schedulers.io())
-
     fun loginWithGoogle(acct: GoogleSignInAccount): Completable =
             userRepository.loginWithGoogle(acct)
                     .subscribeOn(Schedulers.io())
