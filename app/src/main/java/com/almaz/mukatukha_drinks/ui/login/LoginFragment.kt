@@ -13,10 +13,10 @@ import com.almaz.mukatukha_drinks.App
 import com.almaz.mukatukha_drinks.R
 import com.almaz.mukatukha_drinks.ui.base.BaseFragment
 import com.almaz.mukatukha_drinks.ui.login.LoginViewModel.Companion.RC_SIGN_IN
-import com.almaz.mukatukha_drinks.ui.profile.ProfileFragment
 import com.almaz.mukatukha_drinks.utils.LoginState
 import com.almaz.mukatukha_drinks.utils.ScreenState
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import javax.inject.Inject
 
@@ -55,12 +55,18 @@ class LoginFragment : BaseFragment() {
 
         viewModel = ViewModelProvider(this, this.viewModeFactory)
             .get(LoginViewModel::class.java)
-
-        view.btn_login_by_google.setOnClickListener {
-            onGoogleSignInClick()
+        view.btn_login_by_google.setOnClickListener { onGoogleSignInClick() }
+        view.btn_login_by_phone.setOnClickListener { onPhoneSignInClick() }
+        view.btn_send_code.setOnClickListener {
+            viewModel.verifySignInCode(
+                et_verification_code.text.toString(),
+                et_user_name.text.toString(),
+                et_phone_number.text.toString()
+            )
         }
 
         observeLoginState()
+        observePhoneLoginProcessState()
     }
 
     private fun onGoogleSignInClick() {
@@ -68,9 +74,33 @@ class LoginFragment : BaseFragment() {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
+    private fun onPhoneSignInClick() {
+        viewModel.sendVerificationCode(et_phone_number.text.toString())
+        btn_login_by_google.visibility = View.GONE
+        tv_verification_title.visibility = View.VISIBLE
+        et_user_name.visibility = View.VISIBLE
+        et_verification_code.visibility = View.VISIBLE
+        btn_send_code.visibility = View.VISIBLE
+    }
+
     private fun observeLoginState() {
         viewModel.loginState.observe(viewLifecycleOwner, Observer {
             it?.let { screenState -> updateUI(screenState) }
+        })
+    }
+
+    private fun observePhoneLoginProcessState() {
+        viewModel.phoneLoginProcessState.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it.data != null) {
+                    showSnackbar(it.message.toString())
+                    rootActivity.navController
+                        .navigate(R.id.action_loginFragment_to_profileFragment)
+                }
+                if (it.message != null) {
+                    showSnackbar(it.message)
+                }
+            }
         })
     }
 

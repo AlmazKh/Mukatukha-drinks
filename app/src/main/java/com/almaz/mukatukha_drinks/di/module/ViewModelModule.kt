@@ -18,6 +18,11 @@ abstract class ViewModelModule {
     @ViewModelKey(LoginViewModel::class)
     abstract fun bindLoginViewModel(loginViewModel: LoginViewModel): ViewModel
 
+   /* @Binds
+    @IntoMap
+    @ViewModelKey(LoginViewModel::class)
+    abstract fun bindLoginWithPhoneViewModel(loginWithPhoneViewModel: LoginWithPhoneViewModel): ViewModel
+*/
     @Binds
     @IntoMap
     @ViewModelKey(MainViewModel::class)

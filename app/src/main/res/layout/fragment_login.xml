@@ -35,9 +35,6 @@
         android:layout_marginStart="@dimen/spacing_normal_16"
         android:layout_marginTop="@dimen/spacing_small_8"
         android:layout_marginEnd="@dimen/spacing_normal_16"
-        app:endIconContentDescription="@string/end_icon_content_description"
-        app:endIconDrawable="@drawable/ic_nav_profile"
-        app:endIconMode="custom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_login_by_phone_title">
@@ -46,18 +43,79 @@
             android:id="@+id/et_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:freezesText="true"
             android:text="@string/text_default_phone_start_7" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/tv_verification_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal_16"
+        android:layout_marginTop="@dimen/spacing_huge_32"
+        android:text="Введите код из СМС и ваше имя"
+        android:textSize="@dimen/font_large_24"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal_16"
+        android:layout_marginTop="@dimen/spacing_normal_16"
+        android:layout_marginEnd="@dimen/spacing_normal_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_verification_title" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_verification_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal_16"
+        android:layout_marginTop="@dimen/spacing_normal_16"
+        android:layout_marginEnd="@dimen/spacing_normal_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_user_name" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_send_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal_16"
+        android:text="Отправить код"
+        android:visibility="gone"
+        android:textColor="@color/colorPrimary"
+        android:backgroundTint="#4F391C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_verification_code" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login_by_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Войти"
+        android:textColor="@color/colorPrimary"
+        android:backgroundTint="#4F391C"
+        app:layout_constraintTop_toTopOf="@id/text_input_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/spacing_normal_16"
+        app:layout_constraintBottom_toBottomOf="@id/text_input_layout"/>
+
     <Button
         android:id="@+id/btn_login_by_google"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_normal_16"
         android:layout_marginTop="@dimen/spacing_normal_16"
         android:layout_marginEnd="@dimen/spacing_normal_16"
         android:text="@string/btn_text_enter_by_google"
+        android:background="@drawable/back_login_google_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_input_layout" />

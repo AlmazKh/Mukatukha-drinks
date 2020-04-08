@@ -54,7 +54,7 @@ class ProfileFragment : BaseFragment() {
         viewModel.isLoginedLiveData.observe(viewLifecycleOwner, Observer { response ->
             if (response.data != null) {
                 if (response.data) {
-//                    showSnackbar("Welcome to your Profile")
+                    showSnackbar("Welcome to your Profile")
 //                    rootActivity.navController.navigate(R.id.action_loginFragment_to_profileFragment)
                 } else {
                     rootActivity.navController.navigate(R.id.loginFragment)
