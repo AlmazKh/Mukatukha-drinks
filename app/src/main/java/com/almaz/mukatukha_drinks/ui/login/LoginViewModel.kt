@@ -14,7 +14,6 @@ import com.google.android.gms.common.api.ApiException
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-const val PHONE_NUMBER_LENGHT = 10
 
 class LoginViewModel
 @Inject constructor(
@@ -22,7 +21,7 @@ class LoginViewModel
 ) : BaseViewModel() {
 
     val loginState = MutableLiveData<ScreenState<LoginState>>()
-    val phoneLoginProcessState = MutableLiveData<FieldState<Boolean>>()
+    val phoneLoginProcessState = MutableLiveData<FieldState>()
     private var storedVerificationId: String? = null
     private var storedPhoneNumber: String? = null
 
@@ -54,43 +53,37 @@ class LoginViewModel
     }
 
     fun sendVerificationCode(phoneNumber: String) {
-        if (phoneNumber.isEmpty()) {
-            phoneLoginProcessState.value = FieldState(null, "Введите номер телефона")
-            return
-        }
-        if (phoneNumber.length < PHONE_NUMBER_LENGHT) {
-            phoneLoginProcessState.value = FieldState(null, "Введите корректный номер телефона")
-            return
-        }
         disposables.addAll(
             loginInteractor.sendVerificationCode(phoneNumber)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    phoneLoginProcessState.value =
-                        FieldState(null, "Мы отправили вам код верификации")
+                    FieldState.success("Мы отправили вам код верификации")
                     storedVerificationId = it
                     storedPhoneNumber = phoneNumber
                 }, {
-                    phoneLoginProcessState.value = FieldState(null, "Возникла ошибка")
+                    loginState.value = ScreenState.Render(LoginState.ERROR)
+                    it.printStackTrace()
                 }, {
-                    Log.d("MYLOG", "success send verif")
-                    phoneLoginProcessState.value = FieldState(null, "Успешно!")
+                    Log.d("MYLOG", "success sign in")
+                    loginState.value = ScreenState.Render(LoginState.SUCCESS_LOGIN)
                 })
         )
     }
 
     fun verifySignInCode(verificationCode: String, userName: String, phoneNumber: String) {
         if (storedVerificationId == null) {
-            phoneLoginProcessState.value = FieldState(null, "Сначала введите номер телефона")
+            phoneLoginProcessState.value = FieldState.error("Сначала введите номер телефона")
             return
         }
         if (storedPhoneNumber == null) {
-            phoneLoginProcessState.value = FieldState(null, "Введите корректный номер телефона")
+            phoneLoginProcessState.value = FieldState.error("Введите корректный номер телефона")
             return
         }
         if (storedPhoneNumber != phoneNumber) {
-            phoneLoginProcessState.value = FieldState(null, "Введите корректный номер телефона")
+            phoneLoginProcessState.value =
+                FieldState.error("Фактический и введенные номера не совпадают")
         }
+        loginState.value = ScreenState.Loading
         disposables.add(
             loginInteractor.loginWithPhone(
                 storedVerificationId!!,
@@ -100,11 +93,9 @@ class LoginViewModel
             )
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    Log.d("MYLOG", "success verif")
-                    phoneLoginProcessState.value =
-                        FieldState(true, "Введите корректный номер телефона")
+                    loginState.value = ScreenState.Render(LoginState.SUCCESS_LOGIN)
                 }, {
-                    phoneLoginProcessState.value = FieldState(null, "Ошибка. Попробуйте еще раз")
+                    loginState.value = ScreenState.Render(LoginState.ERROR)
                     it.printStackTrace()
                 })
         )

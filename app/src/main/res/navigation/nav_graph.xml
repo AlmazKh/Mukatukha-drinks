@@ -12,12 +12,20 @@
         tools:layout="@layout/fragment_login">
 
         <action
-            android:id="@+id/action_loginFragment_to_profileFragment"
-            app:destination="@id/profileFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true"/>
+            android:id="@+id/action_loginFragment_to_loginWithPhoneFragment"
+            app:destination="@id/loginWihPhoneFragment"
+            app:popUpTo="@id/profileFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginWihPhoneFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.login.LoginWithPhoneFragment"
+        android:label="login_with_phone"
+        tools:layout="@layout/fragment_login_phone">
+
+        <argument
+            android:name="phone_number"
+            app:argType="string"/>
     </fragment>
 
     <fragment
@@ -62,6 +70,8 @@
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim" />
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

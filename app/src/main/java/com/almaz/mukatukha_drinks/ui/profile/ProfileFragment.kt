@@ -40,7 +40,8 @@ class ProfileFragment : BaseFragment() {
         setToolbarAndBottomNavVisibility(
             toolbarVisibility = View.VISIBLE,
             bottomNavVisibility = View.VISIBLE
-        )    }
+        )
+    }
 
     private fun init() {
         viewModel = ViewModelProvider(this, this.viewModeFactory)
@@ -55,9 +56,10 @@ class ProfileFragment : BaseFragment() {
             if (response.data != null) {
                 if (response.data) {
                     showSnackbar("Welcome to your Profile")
+                    //TODO: set up data like name and points
 //                    rootActivity.navController.navigate(R.id.action_loginFragment_to_profileFragment)
                 } else {
-                    rootActivity.navController.navigate(R.id.loginFragment)
+                    rootActivity.navController.navigate(R.id.action_profileFragment_to_loginFragment)
                 }
             }
         })

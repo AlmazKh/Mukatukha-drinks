@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.almaz.itis_booking.utils.ViewModelFactory
@@ -57,16 +58,8 @@ class LoginFragment : BaseFragment() {
             .get(LoginViewModel::class.java)
         view.btn_login_by_google.setOnClickListener { onGoogleSignInClick() }
         view.btn_login_by_phone.setOnClickListener { onPhoneSignInClick() }
-        view.btn_send_code.setOnClickListener {
-            viewModel.verifySignInCode(
-                et_verification_code.text.toString(),
-                et_user_name.text.toString(),
-                et_phone_number.text.toString()
-            )
-        }
 
         observeLoginState()
-        observePhoneLoginProcessState()
     }
 
     private fun onGoogleSignInClick() {
@@ -75,32 +68,23 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun onPhoneSignInClick() {
-        viewModel.sendVerificationCode(et_phone_number.text.toString())
-        btn_login_by_google.visibility = View.GONE
-        tv_verification_title.visibility = View.VISIBLE
-        et_user_name.visibility = View.VISIBLE
-        et_verification_code.visibility = View.VISIBLE
-        btn_send_code.visibility = View.VISIBLE
+        if (et_phone_number.text.toString().isEmpty()) {
+            showSnackbar("Введите номер телефона")
+            return
+        }
+        if (et_phone_number.text.toString().length < PHONE_NUMBER_LENGHT) {
+            showSnackbar("Введите корректный номер телефона")
+            return
+        }
+        rootActivity.navController.navigate(
+            R.id.action_loginFragment_to_loginWithPhoneFragment,
+            bundleOf("phone_number" to et_phone_number.text.toString())
+        )
     }
 
     private fun observeLoginState() {
         viewModel.loginState.observe(viewLifecycleOwner, Observer {
             it?.let { screenState -> updateUI(screenState) }
-        })
-    }
-
-    private fun observePhoneLoginProcessState() {
-        viewModel.phoneLoginProcessState.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                if (it.data != null) {
-                    showSnackbar(it.message.toString())
-                    rootActivity.navController
-                        .navigate(R.id.action_loginFragment_to_profileFragment)
-                }
-                if (it.message != null) {
-                    showSnackbar(it.message)
-                }
-            }
         })
     }
 
@@ -115,14 +99,19 @@ class LoginFragment : BaseFragment() {
         rootActivity.showLoading(false)
         when (renderState) {
             LoginState.SUCCESS_LOGIN -> {
+                // TODO: fix visibility data setting
                 showSnackbar("Welcome back to Mukatukha Drinks!")
+                setToolbarAndBottomNavVisibility(
+                    toolbarVisibility = View.VISIBLE,
+                    bottomNavVisibility = View.VISIBLE
+                )
                 rootActivity.navController
-                    .navigate(R.id.action_loginFragment_to_profileFragment)
+                    .navigateUp()
             }
             LoginState.SUCCESS_REGISTER -> {
                 showSnackbar("Welcome to Mukatukha Drinks!")
                 rootActivity.navController
-                    .navigate(R.id.action_loginFragment_to_profileFragment)
+                    .navigateUp()
             }
             LoginState.ERROR -> view?.let {
                 showSnackbar(getString(R.string.snackbar_error_message))
@@ -131,6 +120,6 @@ class LoginFragment : BaseFragment() {
     }
 
     companion object {
-        fun newInstance() = LoginFragment()
+        const val PHONE_NUMBER_LENGHT = 10
     }
 }

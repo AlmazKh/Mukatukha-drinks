@@ -1,10 +1,10 @@
 package com.almaz.mukatukha_drinks.utils
 
-class FieldState<T>(val data: T?, val message: String?) {
+class FieldState(val data: Boolean, val message: String?) {
 
     companion object {
-        fun <T> success(data: T, message: String?): FieldState<T> = FieldState(data, message)
+        fun success(message: String?): FieldState = FieldState(true, message)
 
-        fun <T> error(error: String?): FieldState<T> = FieldState(null, error)
+        fun error(message: String?): FieldState = FieldState(false, message)
     }
 }
