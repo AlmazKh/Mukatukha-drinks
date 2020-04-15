@@ -5,17 +5,6 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tv_login_page_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_normal_16"
-        android:layout_marginTop="@dimen/spacing_small_8"
-        android:text="@string/text_enter"
-        android:textSize="@dimen/font_large_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/tv_login_by_phone_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +15,7 @@
         android:textSize="@dimen/font_normal_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login_page_title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_input_layout"

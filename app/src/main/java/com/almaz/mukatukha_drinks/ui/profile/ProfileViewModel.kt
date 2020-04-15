@@ -1,7 +1,6 @@
 package com.almaz.mukatukha_drinks.ui.profile
 
 import androidx.lifecycle.MutableLiveData
-import com.almaz.mukatukha_drinks.core.interactors.LoginInteractor
 import com.almaz.mukatukha_drinks.core.interactors.ProfileInteractor
 import com.almaz.mukatukha_drinks.ui.base.BaseViewModel
 import com.almaz.mukatukha_drinks.utils.Response
@@ -26,6 +25,19 @@ class ProfileViewModel
                         isLoginedLiveData.value = Response.success(false)
                     }
                 }, {
+                    it.printStackTrace()
+                })
+        )
+    }
+
+    fun logout() {
+        disposables.add(
+            profileInteractor.logout()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    isLoginedLiveData.value = Response.success(false)
+                }, {
+                    isLoginedLiveData.value = Response.error(it)
                     it.printStackTrace()
                 })
         )

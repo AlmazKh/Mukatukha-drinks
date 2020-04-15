@@ -1,18 +1,31 @@
 <resources>
-    <string name="app_name">mukatukha-drinks</string>
-    <string name="cafe_page_title">Cafe</string>
-    <string name="special_offer_page_title">Special offers</string>
-    <string name="basket_page_title">Basket</string>
-    <string name="notification_page_title">Notification</string>
-    <string name="profile_page_title">Profile</string>
+    <string name="app_name">Mukatukha Drinks</string>
+
+    <string name="cafe_page_title">Кофейни</string>
+    <string name="special_offer_page_title">Акции</string>
+    <string name="basket_page_title">Корзина</string>
+    <string name="notification_page_title">Уведомления</string>
+    <string name="profile_page_title">Профиль</string>
 
     <string name="web_client_id">654790994835-56kkosqeuuo44hj3u124k5gn144kidns.apps.googleusercontent.com</string>
 
     <string name="snackbar_error_message">Произошла ошибка</string>
 
-    <string name="text_enter">Вход</string>
+    <!--Login-->
+    <string name="login_page_title">Вход</string>
     <string name="text_login_by_phone_description">Введите номер телефона, чтобы войти или зарегистрироваться</string>
     <string name="end_icon_content_description">Tab to enter</string>
     <string name="text_default_phone_start_7">+7</string>
     <string name="btn_text_enter_by_google">Войти с помощью Google</string>
+
+    <!--Profile-->
+    <string name="def_user_name">Ваше имя</string>
+    <string name="menu_my_data">Мои данные</string>
+    <string name="menu_lovely_drinks">Любимые напитки</string>
+    <string name="menu_history">История заказов</string>
+    <string name="menu_payment_method">Способ оплаты</string>
+    <string name="menu_support">Служба поддержки</string>
+    <string name="share_btn_offer_text">100 баллов тебе и другу</string>
+    <string name="text_logout">Выйти</string>
+    <string name="default_points">У вас 6558 баллов</string>
 </resources>

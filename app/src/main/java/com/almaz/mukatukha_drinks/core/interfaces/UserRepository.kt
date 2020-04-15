@@ -16,4 +16,5 @@ interface UserRepository {
     ): Completable
 
     fun sendVerificationCode(phoneNumber: String): Maybe<String>
+    fun logout(): Completable
 }

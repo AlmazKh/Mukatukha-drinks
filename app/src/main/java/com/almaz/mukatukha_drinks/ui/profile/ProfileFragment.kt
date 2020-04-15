@@ -11,7 +11,7 @@ import com.almaz.itis_booking.utils.ViewModelFactory
 import com.almaz.mukatukha_drinks.App
 import com.almaz.mukatukha_drinks.R
 import com.almaz.mukatukha_drinks.ui.base.BaseFragment
-import com.almaz.mukatukha_drinks.ui.main.MainViewModel
+import kotlinx.android.synthetic.main.fragment_profile.*
 import javax.inject.Inject
 
 class ProfileFragment : BaseFragment() {
@@ -41,6 +41,18 @@ class ProfileFragment : BaseFragment() {
             toolbarVisibility = View.VISIBLE,
             bottomNavVisibility = View.VISIBLE
         )
+        setToolbarTitle(getString(R.string.profile_page_title))
+
+        tv_my_data.setOnClickListener {}
+        tv_lovely_drinks.setOnClickListener {}
+        tv_history.setOnClickListener {}
+        tv_payment_method.setOnClickListener {}
+        tv_support.setOnClickListener {}
+
+        btn_logout.setOnClickListener {
+            viewModel.logout()
+        }
+        text_input_layout_share.setOnClickListener {}
     }
 
     private fun init() {
@@ -63,8 +75,4 @@ class ProfileFragment : BaseFragment() {
                 }
             }
         })
-
-    companion object {
-        fun newInstance() = ProfileFragment()
-    }
 }

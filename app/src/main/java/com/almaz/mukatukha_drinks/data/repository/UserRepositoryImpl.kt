@@ -11,7 +11,10 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 import io.reactivex.Completable
+import io.reactivex.Flowable.just
 import io.reactivex.Maybe
+import io.reactivex.Observable
+import io.reactivex.Observable.just
 import io.reactivex.Single
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -23,6 +26,11 @@ class UserRepositoryImpl
 ) : UserRepository {
 
     override fun checkAuthUser(): Single<Boolean> = Single.just(firebaseAuth.currentUser != null)
+
+    override fun logout(): Completable {
+        firebaseAuth.signOut()
+        return Completable.complete()
+    }
 
     override fun loginWithGoogle(acct: GoogleSignInAccount): Completable {
         return Completable.create { emitter ->

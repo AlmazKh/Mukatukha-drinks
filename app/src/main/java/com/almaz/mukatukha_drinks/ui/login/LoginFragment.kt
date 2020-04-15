@@ -50,9 +50,10 @@ class LoginFragment : BaseFragment() {
 
     private fun init(view: View) {
         setToolbarAndBottomNavVisibility(
-            toolbarVisibility = View.GONE,
-            bottomNavVisibility = View.GONE
+            toolbarVisibility = View.VISIBLE,
+            bottomNavVisibility = View.VISIBLE
         )
+        setToolbarTitle(getString(R.string.login_page_title))
 
         viewModel = ViewModelProvider(this, this.viewModeFactory)
             .get(LoginViewModel::class.java)
@@ -101,10 +102,6 @@ class LoginFragment : BaseFragment() {
             LoginState.SUCCESS_LOGIN -> {
                 // TODO: fix visibility data setting
                 showSnackbar("Welcome back to Mukatukha Drinks!")
-                setToolbarAndBottomNavVisibility(
-                    toolbarVisibility = View.VISIBLE,
-                    bottomNavVisibility = View.VISIBLE
-                )
                 rootActivity.navController
                     .navigateUp()
             }

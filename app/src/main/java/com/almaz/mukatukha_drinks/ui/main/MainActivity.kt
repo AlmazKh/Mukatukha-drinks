@@ -1,10 +1,7 @@
 package com.almaz.mukatukha_drinks.ui.main
 
-import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -12,12 +9,6 @@ import com.almaz.itis_booking.utils.ViewModelFactory
 import com.almaz.mukatukha_drinks.App
 import com.almaz.mukatukha_drinks.R
 import com.almaz.mukatukha_drinks.ui.base.BaseActivity
-import com.almaz.mukatukha_drinks.ui.basket.BasketFragment
-import com.almaz.mukatukha_drinks.ui.cafe.CafeFragment
-import com.almaz.mukatukha_drinks.ui.login.LoginFragment
-import com.almaz.mukatukha_drinks.ui.notification.NotificationFragment
-import com.almaz.mukatukha_drinks.ui.profile.ProfileFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -40,6 +31,7 @@ class MainActivity : BaseActivity() {
 
     override fun setupView() {
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         bottom_nav?.setupWithNavController(navController)
         viewModel = ViewModelProvider(this, this.viewModeFactory)
                 .get(MainViewModel::class.java)

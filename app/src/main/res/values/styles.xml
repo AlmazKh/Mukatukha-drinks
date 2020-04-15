@@ -8,4 +8,24 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="BaseText">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textColor">@color/colorBaseText</item>
+        <item name="android:textSize">@dimen/font_high_normal_20</item>
+    </style>
+
+    <style name="TitleText">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textColor">@color/colorBaseText</item>
+        <item name="android:textSize">@dimen/font_large_24</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginStart">@dimen/spacing_normal_16</item>
+        <item name="android:layout_marginTop">@dimen/spacing_normal_16</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_normal_16</item>
+        <item name="android:background">@color/colorDividerColor</item>
+    </style>
 </resources>
