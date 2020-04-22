@@ -8,7 +8,7 @@
     <string name="profile_page_title">Профиль</string>
 
     <string name="web_client_id">654790994835-56kkosqeuuo44hj3u124k5gn144kidns.apps.googleusercontent.com</string>
-
+    <string name="google_maps_api_key">AIzaSyATwAWtHZ2NTIe3U0aFMPFj_bL0Qu3Lrb4</string>
     <string name="snackbar_error_message">Произошла ошибка</string>
 
     <!--Login-->

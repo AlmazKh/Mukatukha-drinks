@@ -14,10 +14,6 @@ import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
 
-    @Inject
-    lateinit var viewModeFactory: ViewModelFactory
-    private lateinit var viewModel: MainViewModel
-
     val navController by lazy { findNavController(R.id.nav_host_fragment) }
 
     override val layoutId: Int
@@ -33,8 +29,6 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         bottom_nav?.setupWithNavController(navController)
-        viewModel = ViewModelProvider(this, this.viewModeFactory)
-                .get(MainViewModel::class.java)
     }
 
     fun showLoading(show: Boolean) {

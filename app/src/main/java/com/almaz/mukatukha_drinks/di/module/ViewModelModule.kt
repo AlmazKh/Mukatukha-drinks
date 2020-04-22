@@ -1,8 +1,8 @@
 package com.almaz.mukatukha_drinks.di.module
 
 import androidx.lifecycle.ViewModel
+import com.almaz.mukatukha_drinks.ui.cafe.MapViewModel
 import com.almaz.mukatukha_drinks.ui.login.LoginViewModel
-import com.almaz.mukatukha_drinks.ui.main.MainViewModel
 import com.almaz.mukatukha_drinks.ui.profile.ProfileViewModel
 import dagger.Binds
 import dagger.MapKey
@@ -18,20 +18,15 @@ abstract class ViewModelModule {
     @ViewModelKey(LoginViewModel::class)
     abstract fun bindLoginViewModel(loginViewModel: LoginViewModel): ViewModel
 
-   /* @Binds
-    @IntoMap
-    @ViewModelKey(LoginViewModel::class)
-    abstract fun bindLoginWithPhoneViewModel(loginWithPhoneViewModel: LoginWithPhoneViewModel): ViewModel
-*/
-    @Binds
-    @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    abstract fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
-
     @Binds
     @IntoMap
     @ViewModelKey(ProfileViewModel::class)
     abstract fun bindProfileViewModel(profileViewModel: ProfileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MapViewModel::class)
+    abstract fun bindMapViewModel(mapViewModel: MapViewModel): ViewModel
 }
 
 @Target(
