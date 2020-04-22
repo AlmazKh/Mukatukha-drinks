@@ -17,6 +17,7 @@ import com.almaz.itis_booking.utils.ViewModelFactory
 import com.almaz.mukatukha_drinks.App
 import com.almaz.mukatukha_drinks.R
 import com.almaz.mukatukha_drinks.ui.base.BaseFragment
+import com.almaz.mukatukha_drinks.utils.GoogleMapConfig
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -33,6 +34,8 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     private lateinit var viewModel: MapViewModel
 
     private lateinit var mMap: GoogleMap
+    private var mLocationPermissionsGranted = false
+    private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,25 +67,13 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     private fun init() {
         viewModel = ViewModelProvider(this, this.viewModeFactory)
             .get(MapViewModel::class.java)
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        /*val mapFragment = childFragmentManager
-            .findFragmentById(R.id.google_maps) as SupportMapFragment
-        mapFragment.getMapAsync(this)*/
         getLocationPermission()
     }
-
-    /*override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))    }*/
 
     override fun onMapReady(googleMap: GoogleMap) {
         Toast.makeText(rootActivity.applicationContext, "Map is Ready", Toast.LENGTH_SHORT).show()
         Log.d(TAG, "onMapReady: map is ready")
-        mMap = googleMap
+        mMap = GoogleMapConfig().configFragmentMaps(googleMap)
         if (mLocationPermissionsGranted) {
             getDeviceLocation()
             if (ActivityCompat.checkSelfPermission(
@@ -102,17 +93,6 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         }
     }
 
-    private val TAG = "MapActivity"
-
-    private val FINE_LOCATION: String = Manifest.permission.ACCESS_FINE_LOCATION
-    private val COURSE_LOCATION: String = Manifest.permission.ACCESS_COARSE_LOCATION
-    private val LOCATION_PERMISSION_REQUEST_CODE = 1234
-    private val DEFAULT_ZOOM = 15f
-
-    //vars
-    private var mLocationPermissionsGranted = false
-    private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
-
     private fun getDeviceLocation() {
         Log.d(TAG, "getDeviceLocation: getting the devices current location")
         mFusedLocationProviderClient =
@@ -124,14 +104,16 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
                         location.addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Log.d(TAG, "onComplete: found location!")
-                            val currentLocation: Location? = task.result as Location?
-                            moveCamera(
-                                LatLng(
-                                    currentLocation?.latitude!!,
-                                    currentLocation.longitude
-                                ),
-                                DEFAULT_ZOOM
-                            )
+                            val currentLocation: Location? = task.result
+                            if (currentLocation != null) {
+                                moveCamera(
+                                    LatLng(
+                                        currentLocation.latitude,
+                                        currentLocation.longitude
+                                    ),
+                                    DEFAULT_ZOOM
+                                )
+                            }
                         } else {
                             Log.d(TAG, "onComplete: current location is null")
                             Toast.makeText(
@@ -157,7 +139,6 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
 
     private fun initMap() {
         Log.d(TAG, "initMap: initializing map")
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.google_maps) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -165,7 +146,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
 
     private fun getLocationPermission() {
         Log.d(TAG, "getLocationPermission: getting location permissions")
-        val permissions = arrayOf<String>(
+        val permissions = arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION
         )
@@ -218,11 +199,18 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
                     }
                     Log.d(TAG, "onRequestPermissionsResult: permission granted")
                     mLocationPermissionsGranted = true
-                    //initialize our map
                     initMap()
                 }
             }
         }
     }
 
+    companion object {
+        private const val FINE_LOCATION: String = Manifest.permission.ACCESS_FINE_LOCATION
+        private const val COURSE_LOCATION: String = Manifest.permission.ACCESS_COARSE_LOCATION
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1234
+        private const val DEFAULT_ZOOM = 15f
+
+        private const val TAG = "MapActivity"
+    }
 }
