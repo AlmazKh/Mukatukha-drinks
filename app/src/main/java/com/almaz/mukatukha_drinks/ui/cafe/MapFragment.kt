@@ -25,6 +25,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import kotlinx.android.synthetic.main.fragment_google_maps.*
 import javax.inject.Inject
 
 
@@ -40,7 +41,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.appComponent
-            .mapComponent()
+            .cafeComponent()
             .withActivity(activity as AppCompatActivity)
             .build()
             .inject(this)
@@ -62,6 +63,10 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
             toolbarVisibility = View.GONE,
             bottomNavVisibility = View.VISIBLE
         )
+
+        fab_cafes_list.setOnClickListener {
+            rootActivity.navController.navigate(R.id.action_mapFragment_to_cafeListFragment)
+        }
     }
 
     private fun init() {

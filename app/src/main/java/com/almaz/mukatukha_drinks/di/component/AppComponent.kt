@@ -20,5 +20,5 @@ interface AppComponent {
     fun mainComponent(): MainComponent.Builder
     fun authComponent(): AuthComponent.Builder
     fun profileComponent(): ProfileComponent.Builder
-    fun mapComponent(): MapComponent.Builder
+    fun cafeComponent(): CafeComponent.Builder
 }

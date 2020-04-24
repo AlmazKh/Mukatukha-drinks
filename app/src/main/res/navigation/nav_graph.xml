@@ -34,13 +34,30 @@
         android:label="fragment_map"
         tools:layout="@layout/fragment_google_maps">
 
+        <action
+            android:id="@+id/action_mapFragment_to_cafeListFragment"
+            app:destination="@id/cafeListFragment"
+            app:popUpTo="@id/mapFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/cafeFragment"
-        android:name="com.almaz.mukatukha_drinks.ui.cafe.CafeFragment"
-        android:label="fragment_cafe"
-        tools:layout="@layout/fragment_cafe">
+        android:id="@+id/cafeListFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.cafe.CafeListFragment"
+        android:label="fragment_cafe_list"
+        tools:layout="@layout/fragment_cafe_list">
+
+        <action
+            android:id="@+id/action_cafeListFragment_to_cafeMenuFragment"
+            app:destination="@id/cafeMenuFragment"
+            app:popUpTo="@id/cafeListFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/cafeMenuFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.cafe.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_cafe_menu">
 
     </fragment>
 
