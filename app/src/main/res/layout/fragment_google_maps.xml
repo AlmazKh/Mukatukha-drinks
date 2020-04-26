@@ -29,12 +29,11 @@
         android:clickable="true"
         android:tint="@android:color/white"
         app:fabSize="normal"
-        app:layout_anchor="@id/bottom_sheet_cafe_list"
-        app:layout_anchorGravity="top|end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:rippleColor="@android:color/white"
-        app:srcCompat="@drawable/ic_format_list_bulleted_black_24dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        app:srcCompat="@drawable/ic_format_list_bulleted_white_24dp"
         android:focusable="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

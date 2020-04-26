@@ -31,6 +31,10 @@ class MainActivity : BaseActivity() {
         bottom_nav?.setupWithNavController(navController)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp()
+    }
+
     fun showLoading(show: Boolean) {
         if (show) {
             pb_main.visibility = View.VISIBLE
