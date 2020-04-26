@@ -6,6 +6,7 @@ import com.almaz.mukatukha_drinks.di.scope.ScreenScope
 import com.almaz.mukatukha_drinks.ui.cafe.MenuFragment
 import com.almaz.mukatukha_drinks.ui.cafe.CafeListFragment
 import com.almaz.mukatukha_drinks.ui.cafe.MapFragment
+import com.almaz.mukatukha_drinks.ui.cafe.ProductListFragment
 import dagger.BindsInstance
 import dagger.Subcomponent
 
@@ -27,4 +28,5 @@ interface CafeComponent {
     fun inject(mapFragment: MapFragment)
     fun inject(cafeListFragment: CafeListFragment)
     fun inject(menuFragment: MenuFragment)
+    fun inject(productListFragment: ProductListFragment)
 }

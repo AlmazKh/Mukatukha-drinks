@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_product_image"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/default_cap_of_coffee"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_product_name"
+        style="@style/TitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal_16"
+        android:layout_marginTop="@dimen/spacing_small_8"
+        android:layout_marginEnd="@dimen/spacing_normal_16"
+        android:text="Coffee name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_product_image" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        style="@style/BaseText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal_16"
+        android:layout_marginTop="@dimen/spacing_normal_16"
+        android:layout_marginEnd="@dimen/spacing_normal_16"
+        android:text="some text with asdfasdasd asdasdasasdasd asdasd asdasd asdasd ds"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_product_name" />
+
+    <View
+        android:id="@+id/divider_description_ingredients"
+        style="@style/Divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
+    <TextView
+        android:id="@+id/tv_ingredients_title"
+        style="@style/TitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal_16"
+        android:layout_marginTop="@dimen/spacing_normal_16"
+        android:layout_marginEnd="@dimen/spacing_normal_16"
+        android:text="Ингредиенты"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider_description_ingredients" />
+
+    <TextView
+        android:id="@+id/tv_ingredients"
+        style="@style/BaseText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal_16"
+        android:layout_marginTop="@dimen/spacing_normal_16"
+        android:layout_marginEnd="@dimen/spacing_normal_16"
+        android:layout_marginBottom="@dimen/spacing_normal_16"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="asdasdadsasfsds"
+        app:layout_constraintTop_toBottomOf="@id/tv_ingredients_title"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

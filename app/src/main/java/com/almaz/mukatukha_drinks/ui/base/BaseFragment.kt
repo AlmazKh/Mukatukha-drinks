@@ -38,6 +38,10 @@ open class BaseFragment : Fragment() {
         rootActivity.bottom_nav.visibility = bottomNavVisibility
     }
 
+    fun setToolbarElevation(elevation: Float) {
+        rootActivity.toolbar.elevation = elevation
+    }
+
     fun showSnackbar(message: String) {
         view?.let { it1 ->
             Snackbar.make(
