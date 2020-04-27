@@ -54,8 +54,8 @@ class ProductListFragment: BaseFragment() {
 
         initAdapter()
 
-        observeShowLoadingLiveData()
-        observeProductListLiveData()
+        productAdapter.submitList(arguments?.getParcelableArrayList(ARG_PRODUCT_LIST))
+
         observeProductClickLiveData()
     }
 
@@ -64,28 +64,7 @@ class ProductListFragment: BaseFragment() {
             viewModel.onProductClick(it)
         }
         rv_menu.adapter = productAdapter
-        viewModel.updateProductList()
     }
-
-    private fun observeShowLoadingLiveData() =
-        viewModel.showLoadingLiveData.observe(viewLifecycleOwner, Observer {
-            it?.let { show ->
-                rootActivity.showLoading(show)
-            }
-        })
-
-    private fun observeProductListLiveData() =
-        viewModel.productListLiveData.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                if (it.data != null) {
-                    productAdapter.submitList(it.data)
-                    rv_menu.adapter = productAdapter
-                }
-                if (it.error != null) {
-                    showSnackbar(getString(R.string.snackbar_error_message))
-                }
-            }
-        })
 
     private fun observeProductClickLiveData() =
         viewModel.productClickLiveData.observe(viewLifecycleOwner, Observer {

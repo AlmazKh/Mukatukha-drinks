@@ -5,15 +5,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.almaz.itis_booking.utils.ViewModelFactory
 import com.almaz.mukatukha_drinks.App
 import com.almaz.mukatukha_drinks.R
+import com.almaz.mukatukha_drinks.core.model.ProductCategory
 import com.almaz.mukatukha_drinks.ui.base.BaseFragment
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_cafe_menu.*
+import javax.inject.Inject
+
 
 class MenuFragment : BaseFragment() {
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    private lateinit var viewModel: MenuViewModel
     private lateinit var menuViewPagerAdapter: MenuViewPagerAdapter
+
+    private var listenersSettingUp = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,19 +42,23 @@ class MenuFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setToolbarAndBottomNavVisibility(
+            toolbarVisibility = View.VISIBLE,
+            bottomNavVisibility = View.GONE
+        )
+
         setToolbarTitle("Меню")
         setArrowToolbarVisibility(true)
 
-        menuViewPagerAdapter = MenuViewPagerAdapter(this)
-        vp_drinks_menu.adapter = menuViewPagerAdapter
+        viewModel = ViewModelProvider(this, this.viewModelFactory)
+            .get(MenuViewModel::class.java)
 
-        TabLayoutMediator(tabs_drinks_type, vp_drinks_menu,
-            TabLayoutMediator.TabConfigurationStrategy { tab, position ->
-                when(position) {
-                    0 -> tab.text = "Кофе"
-                    1 -> tab.text = "Другие напитки"
-                }
-            }).attach()
+        viewModel.updateProductList(ProductCategory.COFFEE, false)
+//        menuViewPagerAdapter = MenuViewPagerAdapter(this)
+//        vp_drinks_menu.adapter = menuViewPagerAdapter
+
+        observeShowLoadingLiveData()
+        observeProductListLiveData()
     }
 
     override fun onResume() {
@@ -52,5 +69,66 @@ class MenuFragment : BaseFragment() {
     override fun onPause() {
         super.onPause()
         setToolbarElevation(4F)
+    }
+
+    private fun observeShowLoadingLiveData() =
+        viewModel.showLoadingLiveData.observe(viewLifecycleOwner, Observer {
+            it?.let { show ->
+                rootActivity.showLoading(show)
+            }
+        })
+
+
+    private fun observeProductListLiveData() =
+        viewModel.productListLiveData.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it.data != null) {
+                    menuViewPagerAdapter = MenuViewPagerAdapter(this, it.data)
+                    vp_drinks_menu.adapter = menuViewPagerAdapter
+                    if (!listenersSettingUp) {
+                        setUpListenersAndData()
+                        listenersSettingUp = true
+                    }
+                }
+                if (it.error != null) {
+                    showSnackbar(getString(R.string.snackbar_error_message))
+                }
+            }
+        })
+
+    private fun setUpListenersAndData() {
+        TabLayoutMediator(tabs_drinks_type, vp_drinks_menu,
+            TabLayoutMediator.TabConfigurationStrategy { tab, position ->
+                when (position) {
+                    0 -> tab.text = ProductCategory.COFFEE.getStringValue()
+                    1 -> tab.text = ProductCategory.OTHER_DRINKS.getStringValue()
+                }
+            }).attach()
+
+        switch_with_milk.setOnCheckedChangeListener { _, isChecked ->
+            when (tabs_drinks_type.selectedTabPosition) {
+                0 -> viewModel.updateProductList(ProductCategory.COFFEE, isChecked)
+                1 -> viewModel.updateProductList(ProductCategory.OTHER_DRINKS, isChecked)
+            }
+        }
+
+        tabs_drinks_type.addOnTabSelectedListener(object : OnTabSelectedListener {
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when (tab?.position) {
+                    0 -> viewModel.updateProductList(
+                        ProductCategory.COFFEE,
+                        switch_with_milk.isSelected
+                    )
+                    1 -> viewModel.updateProductList(
+                        ProductCategory.OTHER_DRINKS,
+                        switch_with_milk.isSelected
+                    )
+                }
+            }
+        })
     }
 }

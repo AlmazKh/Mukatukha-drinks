@@ -12,10 +12,10 @@ class ProductViewModel
 @Inject constructor(
     private val menuInteractor: MenuInteractor
 ) : BaseViewModel() {
-    val productListLiveData = MutableLiveData<Response<List<Product>>>()
+
     val productClickLiveData = MutableLiveData<Response<Product>>()
 
-    fun updateProductList() {
+   /* fun updateProductList() {
         showLoadingLiveData.value = true
         disposables.add(
             menuInteractor.getProductList()
@@ -30,7 +30,7 @@ class ProductViewModel
                     error.printStackTrace()
                 })
         )
-    }
+    }*/
 
     fun onProductClick(product: Product) {
         productClickLiveData.value = Response.success(product)

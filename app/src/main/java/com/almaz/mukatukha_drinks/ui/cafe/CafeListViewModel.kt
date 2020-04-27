@@ -12,6 +12,7 @@ class CafeListViewModel
     @Inject constructor(
         private val cafeInteractor: CafeInteractor
     ) : BaseViewModel() {
+
     val cafeListLiveData = MutableLiveData<Response<List<Cafe>>>()
     val cabinetClickLiveData = MutableLiveData<Response<Cafe>>()
 

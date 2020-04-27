@@ -2,20 +2,21 @@ package com.almaz.mukatukha_drinks.data.repository
 
 import com.almaz.mukatukha_drinks.core.interfaces.MenuRepository
 import com.almaz.mukatukha_drinks.core.model.Product
+import com.almaz.mukatukha_drinks.core.model.ProductCategory
 import io.reactivex.Single
 import javax.inject.Inject
 
 class MenuRepositoryImpl
 @Inject constructor() : MenuRepository {
 
-    override fun getProductList(): Single<List<Product>> {
+    override fun getProductList(productCategory: ProductCategory, withMilk: Boolean): Single<List<Product>> {
         return Single.just(listOf(
             Product(
                 "1",
                 "Американо",
                 "100 руб.",
                 "0.3 л",
-                "Кофе",
+                ProductCategory.COFFEE,
                 false,
                 "Some text with description"
             ),
@@ -24,7 +25,7 @@ class MenuRepositoryImpl
                 "Капучино",
                 "150 руб.",
                 "0.5 л",
-                "Кофе",
+                ProductCategory.COFFEE,
                 true,
                 "Some text with other description in two lines may be"
             )

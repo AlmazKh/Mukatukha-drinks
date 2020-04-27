@@ -9,7 +9,7 @@ data class Product(
     val name: String,
     val price: String,
     val volume: String,
-    val category: String,
+    val category: ProductCategory,
     val withMilk: Boolean,
     val otherDetails: String?
 ): Parcelable
