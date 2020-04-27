@@ -52,7 +52,12 @@ class MenuFragment : BaseFragment() {
         viewModel = ViewModelProvider(rootActivity, this.viewModelFactory)
             .get(MenuViewModel::class.java)
 
-        viewModel.updateProductList(ProductCategory.COFFEE, false)
+        viewModel.updateProductList(
+            when (tabs_drinks_type.selectedTabPosition) {
+                1 -> ProductCategory.OTHER_DRINKS
+                else -> ProductCategory.COFFEE
+            }, switch_with_milk.isChecked
+        )
 
         menuViewPagerAdapter = MenuViewPagerAdapter(this)
         vp_drinks_menu.adapter = menuViewPagerAdapter
@@ -104,11 +109,11 @@ class MenuFragment : BaseFragment() {
                 when (tab?.position) {
                     0 -> viewModel.updateProductList(
                         ProductCategory.COFFEE,
-                        switch_with_milk.isSelected
+                        switch_with_milk.isChecked
                     )
                     1 -> viewModel.updateProductList(
                         ProductCategory.OTHER_DRINKS,
-                        switch_with_milk.isSelected
+                        switch_with_milk.isChecked
                     )
                 }
             }
