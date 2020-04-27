@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +19,7 @@ class ProductListFragment: BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var viewModel: ProductViewModel
+    private lateinit var viewModel: MenuViewModel
     private lateinit var productAdapter: ProductAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,8 +42,8 @@ class ProductListFragment: BaseFragment() {
         rv_menu.apply {
             layoutManager = LinearLayoutManager(rootView.context)
         }
-        viewModel = ViewModelProvider(this, this.viewModelFactory)
-            .get(ProductViewModel::class.java)
+        viewModel = ViewModelProvider(rootActivity, this.viewModelFactory)
+            .get(MenuViewModel::class.java)
 
         setToolbarAndBottomNavVisibility(
             toolbarVisibility = View.VISIBLE,
@@ -54,8 +53,7 @@ class ProductListFragment: BaseFragment() {
 
         initAdapter()
 
-        productAdapter.submitList(arguments?.getParcelableArrayList(ARG_PRODUCT_LIST))
-
+        observeProductListLiveData()
         observeProductClickLiveData()
     }
 
@@ -65,6 +63,19 @@ class ProductListFragment: BaseFragment() {
         }
         rv_menu.adapter = productAdapter
     }
+
+    private fun observeProductListLiveData() =
+        viewModel.productListLiveData.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it.data != null) {
+                    productAdapter.submitList(it.data)
+                    rv_menu.adapter = productAdapter
+                }
+                if (it.error != null) {
+                    showSnackbar(getString(R.string.snackbar_error_message))
+                }
+            }
+        })
 
     private fun observeProductClickLiveData() =
         viewModel.productClickLiveData.observe(viewLifecycleOwner, Observer {

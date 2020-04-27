@@ -46,19 +46,20 @@ class MenuFragment : BaseFragment() {
             toolbarVisibility = View.VISIBLE,
             bottomNavVisibility = View.GONE
         )
-
         setToolbarTitle("Меню")
         setArrowToolbarVisibility(true)
 
-        viewModel = ViewModelProvider(this, this.viewModelFactory)
+        viewModel = ViewModelProvider(rootActivity, this.viewModelFactory)
             .get(MenuViewModel::class.java)
 
         viewModel.updateProductList(ProductCategory.COFFEE, false)
-//        menuViewPagerAdapter = MenuViewPagerAdapter(this)
-//        vp_drinks_menu.adapter = menuViewPagerAdapter
+
+        menuViewPagerAdapter = MenuViewPagerAdapter(this)
+        vp_drinks_menu.adapter = menuViewPagerAdapter
+
+        setUpListeners()
 
         observeShowLoadingLiveData()
-        observeProductListLiveData()
     }
 
     override fun onResume() {
@@ -78,25 +79,7 @@ class MenuFragment : BaseFragment() {
             }
         })
 
-
-    private fun observeProductListLiveData() =
-        viewModel.productListLiveData.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                if (it.data != null) {
-                    menuViewPagerAdapter = MenuViewPagerAdapter(this, it.data)
-                    vp_drinks_menu.adapter = menuViewPagerAdapter
-                    if (!listenersSettingUp) {
-                        setUpListenersAndData()
-                        listenersSettingUp = true
-                    }
-                }
-                if (it.error != null) {
-                    showSnackbar(getString(R.string.snackbar_error_message))
-                }
-            }
-        })
-
-    private fun setUpListenersAndData() {
+    private fun setUpListeners() {
         TabLayoutMediator(tabs_drinks_type, vp_drinks_menu,
             TabLayoutMediator.TabConfigurationStrategy { tab, position ->
                 when (position) {

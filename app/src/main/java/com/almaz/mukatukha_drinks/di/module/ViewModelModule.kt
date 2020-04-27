@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import com.almaz.mukatukha_drinks.ui.cafe.CafeListViewModel
 import com.almaz.mukatukha_drinks.ui.cafe.MapViewModel
 import com.almaz.mukatukha_drinks.ui.cafe.MenuViewModel
-import com.almaz.mukatukha_drinks.ui.cafe.ProductViewModel
 import com.almaz.mukatukha_drinks.ui.login.LoginViewModel
 import com.almaz.mukatukha_drinks.ui.profile.ProfileViewModel
 import dagger.Binds
@@ -35,11 +34,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CafeListViewModel::class)
     abstract fun bindCafeListViewModel(cafeListViewModel: CafeListViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(ProductViewModel::class)
-    abstract fun bindProductViewModel(productViewModel: ProductViewModel): ViewModel
 
     @Binds
     @IntoMap

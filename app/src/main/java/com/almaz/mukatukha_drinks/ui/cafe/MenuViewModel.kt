@@ -15,6 +15,7 @@ class MenuViewModel
 ) : BaseViewModel() {
 
     val productListLiveData = MutableLiveData<Response<List<Product>>>()
+    val productClickLiveData = MutableLiveData<Response<Product>>()
 
     fun updateProductList(productCategory: ProductCategory, withMilk: Boolean) {
         showLoadingLiveData.value = true
@@ -33,4 +34,7 @@ class MenuViewModel
         )
     }
 
+    fun onProductClick(product: Product) {
+        productClickLiveData.value = Response.success(product)
+    }
 }
