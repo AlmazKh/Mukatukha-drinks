@@ -12,7 +12,7 @@ class CafeRepositoryImpl
         return Single.just(listOf(
             Cafe(
                 "1",
-                "Кофейня 1",
+                "Coffee for U 1",
                 "ул.Пушкина, д.20",
                 "8-800-555-35-35",
                 "15 мин.",
@@ -20,7 +20,7 @@ class CafeRepositoryImpl
             ),
             Cafe(
                 "2",
-                "Кофейня 2",
+                "Some coffee shop 2",
                 "ул.Баумана, д.32",
                 "8-800-555-35-35",
                 "7 мин.",

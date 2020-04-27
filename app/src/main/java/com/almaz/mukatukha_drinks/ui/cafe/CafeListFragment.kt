@@ -1,24 +1,21 @@
 package com.almaz.mukatukha_drinks.ui.cafe
 
 import android.os.Bundle
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
+import android.view.*
+import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.almaz.itis_booking.utils.ViewModelFactory
 import com.almaz.mukatukha_drinks.App
 import com.almaz.mukatukha_drinks.R
 import com.almaz.mukatukha_drinks.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_cafe_list.*
-import kotlinx.android.synthetic.main.item_fragment_cafe_list.view.*
 import javax.inject.Inject
+
 
 class CafeListFragment : BaseFragment() {
 
@@ -55,12 +52,30 @@ class CafeListFragment : BaseFragment() {
             bottomNavVisibility = View.GONE
         )
         setArrowToolbarVisibility(true)
-
+        setToolbarTitle("Кофейни")
         initAdapter()
 
         observeShowLoadingLiveData()
         observeCafeListLiveData()
         observeCafeClickLiveData()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.toollbar_with_search, menu)
+        val searchView = menu.findItem(R.id.action_search).actionView as SearchView
+//        searchView.imeOptions = EditorInfo.IME_ACTION_DONE
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                cafeAdapter.filter.filter(newText)
+                return false
+            }
+
+        })
     }
 
     private fun initAdapter() {
