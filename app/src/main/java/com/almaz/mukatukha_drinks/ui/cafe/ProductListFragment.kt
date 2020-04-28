@@ -59,7 +59,11 @@ class ProductListFragment: BaseFragment() {
 
     private fun initAdapter() {
         productAdapter = ProductAdapter {
-            viewModel.onProductClick(it)
+            when(it.first) {
+                EVENT_KEY_PRODUCT -> viewModel.onProductClick(it.second)
+                EVENT_KEY_ADD -> viewModel.onAddProductClick(it.second)
+                EVENT_KEY_REMOVE -> viewModel.onRemoveProductClick(it.second)
+            }
         }
         rv_menu.adapter = productAdapter
     }

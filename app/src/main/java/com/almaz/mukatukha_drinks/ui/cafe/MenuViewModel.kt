@@ -37,4 +37,28 @@ class MenuViewModel
     fun onProductClick(product: Product) {
         productClickLiveData.value = Response.success(product)
     }
+
+    fun onAddProductClick(product: Product) {
+        disposables.add(
+            menuInteractor.addProductIntoBasket(product)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    // TODO add into basket resp
+                }, {
+
+                })
+        )
+    }
+
+    fun onRemoveProductClick(product: Product) {
+        disposables.add(
+            menuInteractor.removeProductFromBasket(product)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    // TODO delete from basket resp
+                }, {
+
+                })
+        )
+    }
 }

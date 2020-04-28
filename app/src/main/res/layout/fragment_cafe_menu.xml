@@ -1,45 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_height="match_parent">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs_drinks_type"
-        android:layout_width="match_parent"
         style="@style/Widget.MaterialComponents.TabLayout.Colored"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:tabIndicatorColor="@color/colorPrimaryDark"
         app:tabSelectedTextColor="@color/colorPrimaryDark"
         app:tabTextColor="@color/colorSecondaryText" />
 
-    <RelativeLayout
-        android:id="@+id/ll_milk"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_with_milk_title"
+        style="@style/BaseText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_normal_16">
+        android:layout_marginStart="@dimen/spacing_huge_32"
+        android:layout_marginTop="@dimen/spacing_normal_16"
+        android:text="С молоком"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabs_drinks_type" />
 
-        <TextView
-            style="@style/BaseText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_huge_32"
-            android:text="С молоком" />
-
-        <Switch
-            android:id="@+id/switch_with_milk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/spacing_huge_32" />
-    </RelativeLayout>
+    <Switch
+        android:id="@+id/switch_with_milk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_huge_32"
+        app:layout_constraintBottom_toBottomOf="@id/tv_with_milk_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_with_milk_title" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_drinks_menu"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_normal_16"
-        android:layout_weight="1" />
-</LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_with_milk_title" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_go_to_basket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_huge_32"
+        android:layout_marginEnd="@dimen/spacing_huge_32"
+        android:layout_marginBottom="@dimen/spacing_normal_16"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:text="Перейти к корзине"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,25 +32,48 @@
             app:layout_constraintTop_toBottomOf="@id/tv_product_name" />
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_add_into_basket"
+            android:id="@+id/btn_remove_from_basket"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginTop="@dimen/spacing_normal_16"
             android:layout_marginBottom="@dimen/spacing_normal_16"
-            android:background="@drawable/ic_add_box_black_24dp"
+            android:background="@drawable/ic_remove_circle_black_24dp"
             app:layout_constraintStart_toStartOf="@id/tv_volume"
             app:layout_constraintTop_toBottomOf="@id/tv_volume"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
+            android:id="@+id/tv_product_amount_counter"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:gravity="center"
+            style="@style/BaseText"
+            app:layout_constraintTop_toTopOf="@id/btn_remove_from_basket"
+            app:layout_constraintBottom_toBottomOf="@id/btn_remove_from_basket"
+            app:layout_constraintStart_toEndOf="@id/btn_remove_from_basket"
+            android:layout_marginStart="@dimen/spacing_small_8"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_add_into_basket"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/ic_add_box_black_24dp"
+            app:layout_constraintTop_toTopOf="@id/btn_remove_from_basket"
+            app:layout_constraintBottom_toBottomOf="@id/btn_remove_from_basket"
+            app:layout_constraintStart_toEndOf="@id/tv_product_amount_counter"
+            android:layout_marginStart="@dimen/spacing_small_8"/>
+
+        <TextView
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_small_8"
+            android:layout_marginStart="@dimen/spacing_normal_16"
             app:layout_constraintBottom_toBottomOf="@id/btn_add_into_basket"
             app:layout_constraintStart_toEndOf="@id/btn_add_into_basket"
             app:layout_constraintTop_toTopOf="@id/btn_add_into_basket"
-            style="@style/BaseText"/>
+            android:text="100"
+            style="@style/BaseText" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_product_image"
