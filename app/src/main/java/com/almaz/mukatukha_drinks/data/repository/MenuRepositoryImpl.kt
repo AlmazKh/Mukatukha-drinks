@@ -3,11 +3,16 @@ package com.almaz.mukatukha_drinks.data.repository
 import com.almaz.mukatukha_drinks.core.interfaces.MenuRepository
 import com.almaz.mukatukha_drinks.core.model.Product
 import com.almaz.mukatukha_drinks.core.model.ProductCategory
+import com.almaz.mukatukha_drinks.core.model.db.BasketDB
+import com.almaz.mukatukha_drinks.data.db.BasketDao
+import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
 class MenuRepositoryImpl
-@Inject constructor() : MenuRepository {
+@Inject constructor(
+    private val basketDao: BasketDao
+) : MenuRepository {
 
     override fun getProductList(productCategory: ProductCategory, withMilk: Boolean): Single<List<Product>> {
         return when(productCategory){
@@ -36,7 +41,7 @@ class MenuRepositoryImpl
                 } else {
                     Single.just(listOf(
                         Product(
-                            "1",
+                            "3",
                             "Американо",
                             "100 руб.",
                             "0.3 л",
@@ -45,7 +50,7 @@ class MenuRepositoryImpl
                             "Some text with description"
                         ),
                         Product(
-                            "2",
+                            "4",
                             "Эспрессо",
                             "150 руб.",
                             "0.5 л",
@@ -61,7 +66,7 @@ class MenuRepositoryImpl
                 if (withMilk) {
                     Single.just(listOf(
                         Product(
-                            "1",
+                            "5",
                             "Молочный коктейль",
                             "190 руб.",
                             "0.3 л",
@@ -70,7 +75,7 @@ class MenuRepositoryImpl
                             "Some text with description"
                         ),
                         Product(
-                            "2",
+                            "6",
                             "Чай с молоком",
                             "150 руб.",
                             "0.5 л",
@@ -82,7 +87,7 @@ class MenuRepositoryImpl
                 } else {
                     Single.just(listOf(
                         Product(
-                            "1",
+                            "7",
                             "Апельсиновый сок",
                             "500 руб.",
                             "0.5 л",
@@ -91,7 +96,7 @@ class MenuRepositoryImpl
                             "Some text with description"
                         ),
                         Product(
-                            "2",
+                            "8",
                             "Морковный фреш",
                             "250 руб.",
                             "0.5 л",
@@ -102,6 +107,52 @@ class MenuRepositoryImpl
                     ))
                 }
             }
+        }
+    }
+
+    override fun addProductIntoBasket(product: Product): Completable {
+        return Completable.create { emitter ->
+            val amount = basketDao.getProductAmountById(product.id.toLong())
+            if (amount != null) {
+                basketDao.updateProductAmount(
+                    product.id.toLong(),
+                    amount + 1,
+                    1 // TODO setting current user id
+                )
+            } else {
+                basketDao.insertItemIntoBasket(
+                    BasketDB(
+                        productId = product.id.toLong(),
+                        amount = 1,
+                        ownerId = 1 // TODO setting current user id
+                    )
+                )
+            }
+            emitter.onComplete()
+        }
+    }
+
+    override fun removeProductFromBasket(product: Product): Completable {
+        return Completable.create { emitter ->
+            val amount = basketDao.getProductAmountById(product.id.toLong())
+            if (amount != null) {
+                if (amount == 1) {
+                    basketDao.delete(
+                        BasketDB(
+                            productId = product.id.toLong(),
+                            amount = 1,
+                            ownerId = 1
+                        )
+                    )
+                } else {
+                    basketDao.updateProductAmount(
+                        product.id.toLong(),
+                        amount - 1,
+                        1 // TODO setting current user id
+                    )
+                }
+            }
+            emitter.onComplete()
         }
     }
 }

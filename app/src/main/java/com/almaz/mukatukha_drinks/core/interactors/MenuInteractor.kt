@@ -17,7 +17,11 @@ class MenuInteractor
         menuRepository.getProductList(productCategory, withMilk)
             .subscribeOn(Schedulers.io())
 
-    fun addProductIntoBasket(product: Product): Completable = Completable.complete()
+    fun addProductIntoBasket(product: Product): Completable =
+        menuRepository.addProductIntoBasket(product)
+            .subscribeOn(Schedulers.io())
 
-    fun removeProductFromBasket(product: Product): Completable = Completable.complete()
+    fun removeProductFromBasket(product: Product): Completable =
+        menuRepository.removeProductFromBasket(product)
+            .subscribeOn(Schedulers.io())
 }
