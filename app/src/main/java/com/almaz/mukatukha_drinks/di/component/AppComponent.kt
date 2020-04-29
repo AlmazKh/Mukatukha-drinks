@@ -1,9 +1,6 @@
 package com.almaz.mukatukha_drinks.di.component
 
-import com.almaz.mukatukha_drinks.di.module.AppModule
-import com.almaz.mukatukha_drinks.di.module.RepoModule
-import com.almaz.mukatukha_drinks.di.module.ViewModelFactoryModule
-import com.almaz.mukatukha_drinks.di.module.ViewModelModule
+import com.almaz.mukatukha_drinks.di.module.*
 import dagger.Component
 import javax.inject.Singleton
 
@@ -13,7 +10,8 @@ import javax.inject.Singleton
             AppModule::class,
             ViewModelModule::class,
             ViewModelFactoryModule::class,
-            RepoModule::class
+            RepoModule::class,
+            DatabaseModule::class
         ]
 )
 interface AppComponent {
