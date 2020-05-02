@@ -19,4 +19,5 @@ interface AppComponent {
     fun authComponent(): AuthComponent.Builder
     fun profileComponent(): ProfileComponent.Builder
     fun cafeComponent(): CafeComponent.Builder
+    fun basketComponent(): BasketComponent.Builder
 }

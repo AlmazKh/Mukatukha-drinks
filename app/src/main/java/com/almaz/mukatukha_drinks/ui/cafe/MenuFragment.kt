@@ -118,5 +118,9 @@ class MenuFragment : BaseFragment() {
                 }
             }
         })
+
+        btn_go_to_basket.setOnClickListener {
+            rootActivity.navController.navigate(R.id.action_cafeMenuFragment_to_basketFragment)
+        }
     }
 }

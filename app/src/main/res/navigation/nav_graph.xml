@@ -58,6 +58,11 @@
         android:name="com.almaz.mukatukha_drinks.ui.cafe.MenuFragment"
         android:label="fragment_menu"
         tools:layout="@layout/fragment_cafe_menu">
+
+        <action
+            android:id="@+id/action_cafeMenuFragment_to_basketFragment"
+            app:destination="@id/basketFragment"
+            app:popUpTo="@id/cafeMenuFragment" />
     </fragment>
 
     <fragment
@@ -98,6 +103,20 @@
         android:label="fragment_basket"
         tools:layout="@layout/fragment_basket">
 
+        <action
+            android:id="@+id/action_basketFragment_to_activeOrderFragment"
+            app:destination="@id/activeOrderFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/activeOrderFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.basket.ActiveOrderFragment"
+        android:label="fragment_active_order"
+        tools:layout="@layout/fragment_active_order">
+
+        <argument
+            android:name="arg_order"
+            app:argType="com.almaz.mukatukha_drinks.core.model.Order" />
     </fragment>
 
     <fragment
