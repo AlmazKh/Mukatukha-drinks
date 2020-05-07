@@ -3,7 +3,6 @@ package com.almaz.mukatukha_drinks.core.model.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.almaz.mukatukha_drinks.core.model.User
 
 @Entity(tableName = "basket")
 data class BasketDB(

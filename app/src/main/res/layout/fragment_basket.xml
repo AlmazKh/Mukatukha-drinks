@@ -204,7 +204,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_make_order"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
             android:layout_marginStart="@dimen/spacing_normal_16"
             android:layout_marginTop="@dimen/spacing_normal_16"
             android:layout_marginEnd="@dimen/spacing_normal_16"
@@ -214,6 +214,20 @@
             android:textAllCaps="false"
             android:textSize="@dimen/font_high_normal_20"
             android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_input_layout_promocode" />
+
+        <include
+            android:id="@+id/btn_make_order_with_googlepay"
+            layout="@layout/buy_with_googlepay_button"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="@dimen/spacing_normal_16"
+            android:layout_marginTop="@dimen/spacing_normal_16"
+            android:layout_marginEnd="@dimen/spacing_normal_16"
+            android:layout_marginBottom="@dimen/spacing_normal_16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
