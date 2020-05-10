@@ -23,6 +23,7 @@
     <string name="menu_my_data">Мои данные</string>
     <string name="menu_lovely_drinks">Любимые напитки</string>
     <string name="menu_notification">Уведомления</string>
+    <string name="menu_daily_facts">Факты дня</string>
     <string name="menu_history">История заказов</string>
     <string name="menu_payment_method">Способ оплаты</string>
     <string name="menu_support">Служба поддержки</string>

@@ -19,79 +19,56 @@
 
     <TextView
         android:id="@+id/tv_my_data"
-        style="@style/BaseText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_huge_32"
-        android:layout_marginTop="@dimen/spacing_large_24"
-        android:clickable="true"
-        android:focusable="true"
+        style="@style/ProfileMenuText"
+        android:drawableStart="@drawable/ic_notifications_none_black_24dp"
         android:text="@string/menu_my_data"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
 
     <TextView
         android:id="@+id/tv_lovely_drinks"
-        style="@style/BaseText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_huge_32"
-        android:layout_marginTop="@dimen/spacing_large_24"
-        android:clickable="true"
-        android:focusable="true"
+        style="@style/ProfileMenuText"
+        android:drawableStart="@drawable/ic_notifications_none_black_24dp"
         android:text="@string/menu_lovely_drinks"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_my_data" />
 
     <TextView
-        android:id="@+id/tv_history"
-        style="@style/BaseText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_huge_32"
-        android:layout_marginTop="@dimen/spacing_large_24"
-        android:clickable="true"
-        android:focusable="true"
-        android:text="@string/menu_history"
+        android:id="@+id/tv_daily_facts"
+        style="@style/ProfileMenuText"
+        android:drawableStart="@drawable/ic_notifications_none_black_24dp"
+        android:text="@string/menu_daily_facts"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_lovely_drinks" />
 
+    <TextView
+        android:id="@+id/tv_history"
+        style="@style/ProfileMenuText"
+        android:drawableStart="@drawable/ic_notifications_none_black_24dp"
+        android:text="@string/menu_history"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_daily_facts" />
 
     <TextView
         android:id="@+id/tv_notification"
-        style="@style/BaseText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_huge_32"
-        android:layout_marginTop="@dimen/spacing_large_24"
-        android:clickable="true"
-        android:focusable="true"
+        style="@style/ProfileMenuText"
+        android:drawableStart="@drawable/ic_notifications_none_black_24dp"
         android:text="@string/menu_notification"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_history" />
 
     <TextView
         android:id="@+id/tv_payment_method"
-        style="@style/BaseText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_huge_32"
-        android:layout_marginTop="@dimen/spacing_large_24"
-        android:clickable="true"
-        android:focusable="true"
+        style="@style/ProfileMenuText"
+        android:drawableStart="@drawable/ic_notifications_none_black_24dp"
         android:text="@string/menu_payment_method"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_notification" />
 
     <TextView
         android:id="@+id/tv_support"
-        style="@style/BaseText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_huge_32"
-        android:layout_marginTop="@dimen/spacing_large_24"
-        android:clickable="true"
-        android:focusable="true"
+        style="@style/ProfileMenuText"
+        android:drawableStart="@drawable/ic_notifications_none_black_24dp"
         android:text="@string/menu_support"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_payment_method" />

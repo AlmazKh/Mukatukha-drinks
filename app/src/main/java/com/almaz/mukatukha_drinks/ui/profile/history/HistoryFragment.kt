@@ -1,4 +1,4 @@
-package com.almaz.mukatukha_drinks.ui.profile.notification
+package com.almaz.mukatukha_drinks.ui.profile.history
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import com.almaz.mukatukha_drinks.App
 import com.almaz.mukatukha_drinks.R
 import com.almaz.mukatukha_drinks.ui.base.BaseFragment
 
-class NotificationFragment : BaseFragment() {
+class HistoryFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +21,7 @@ class NotificationFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_notification, container, false)
+        return inflater.inflate(R.layout.fragment_daily_facts, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,6 +30,6 @@ class NotificationFragment : BaseFragment() {
             toolbarVisibility = View.VISIBLE,
             bottomNavVisibility = View.GONE
         )
-        setToolbarTitle(getString(R.string.menu_notification))
+        setToolbarTitle(getString(R.string.menu_history))
     }
 }

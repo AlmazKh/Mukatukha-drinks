@@ -2,6 +2,7 @@ package com.almaz.mukatukha_drinks.ui.profile
 
 import androidx.lifecycle.MutableLiveData
 import com.almaz.mukatukha_drinks.core.interactors.ProfileInteractor
+import com.almaz.mukatukha_drinks.core.model.User
 import com.almaz.mukatukha_drinks.ui.base.BaseViewModel
 import com.almaz.mukatukha_drinks.utils.Response
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,17 +14,14 @@ class ProfileViewModel
     ): BaseViewModel() {
 
     val isLoginedLiveData = MutableLiveData<Response<Boolean>>()
+    val userDataLiveData = MutableLiveData<Response<User>>()
 
     fun checkAuthUser() {
         disposables.add(
             profileInteractor.checkAuthUser()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    if (it) {
-                        isLoginedLiveData.value = Response.success(true)
-                    } else {
-                        isLoginedLiveData.value = Response.success(false)
-                    }
+                    isLoginedLiveData.value = Response.success(it)
                 }, {
                     it.printStackTrace()
                 })
@@ -38,6 +36,19 @@ class ProfileViewModel
                     isLoginedLiveData.value = Response.success(false)
                 }, {
                     isLoginedLiveData.value = Response.error(it)
+                    it.printStackTrace()
+                })
+        )
+    }
+
+    fun updateUserInfo() {
+        disposables.add(
+            profileInteractor.getUserInfo()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    userDataLiveData.value = Response.success(it)
+                }, {
+                    userDataLiveData.value = Response.error(it)
                     it.printStackTrace()
                 })
         )
