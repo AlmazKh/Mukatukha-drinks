@@ -56,6 +56,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_lovely_drinks" />
 
+
+    <TextView
+        android:id="@+id/tv_notification"
+        style="@style/BaseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_huge_32"
+        android:layout_marginTop="@dimen/spacing_large_24"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/menu_notification"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_history" />
+
     <TextView
         android:id="@+id/tv_payment_method"
         style="@style/BaseText"
@@ -67,7 +81,7 @@
         android:focusable="true"
         android:text="@string/menu_payment_method"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_history" />
+        app:layout_constraintTop_toBottomOf="@id/tv_notification" />
 
     <TextView
         android:id="@+id/tv_support"

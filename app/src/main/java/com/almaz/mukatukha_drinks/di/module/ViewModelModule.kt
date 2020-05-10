@@ -3,7 +3,7 @@ package com.almaz.mukatukha_drinks.di.module
 import androidx.lifecycle.ViewModel
 import com.almaz.mukatukha_drinks.ui.basket.BasketViewModel
 import com.almaz.mukatukha_drinks.ui.cafe.CafeListViewModel
-import com.almaz.mukatukha_drinks.ui.cafe.MapViewModel
+import com.almaz.mukatukha_drinks.ui.map.MapViewModel
 import com.almaz.mukatukha_drinks.ui.cafe.MenuViewModel
 import com.almaz.mukatukha_drinks.ui.login.LoginViewModel
 import com.almaz.mukatukha_drinks.ui.profile.ProfileViewModel

@@ -3,12 +3,12 @@
     <item
         android:id="@+id/mapFragment"
         android:icon="@drawable/ic_nav_cafe"
-        android:title="@string/cafe_page_title" />
+        android:title="@string/map_page_title" />
 
     <item
-        android:id="@+id/specialOfferFragment"
+        android:id="@+id/cafeListFragment"
         android:icon="@drawable/ic_nav_special_offer"
-        android:title="@string/special_offer_page_title" />
+        android:title="@string/cafe_page_title" />
 
     <item
         android:id="@+id/basketFragment"
@@ -16,9 +16,9 @@
         android:title="@string/basket_page_title" />
 
     <item
-        android:id="@+id/notificationFragment"
-        android:icon="@drawable/ic_nav_notification"
-        android:title="@string/notification_page_title" />
+        android:id="@+id/specialOfferFragment"
+        android:icon="@drawable/ic_nav_special_offer"
+        android:title="@string/special_offer_page_title" />
 
     <item
         android:id="@+id/profileFragment"

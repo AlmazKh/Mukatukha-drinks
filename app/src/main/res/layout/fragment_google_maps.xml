@@ -15,25 +15,4 @@
     <include
         android:id="@+id/search_bar"
         layout="@layout/search_bar" />
-
-    <!--bottom sheet container-->
-    <include
-        android:id="@+id/bottom_sheet_cafe_list"
-        layout="@layout/fragment_cafe_list" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_cafes_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_normal_16"
-        android:clickable="true"
-        android:tint="@android:color/white"
-        app:fabSize="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:rippleColor="@android:color/white"
-        android:backgroundTint="@color/colorPrimaryDark"
-        app:srcCompat="@drawable/ic_format_list_bulleted_white_24dp"
-        android:focusable="true" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.almaz.mukatukha_drinks.ui.notification
+package com.almaz.mukatukha_drinks.ui.profile.notification
 
 import com.almaz.mukatukha_drinks.ui.base.BaseFragment
 

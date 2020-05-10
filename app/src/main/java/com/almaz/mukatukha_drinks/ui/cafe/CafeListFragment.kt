@@ -49,9 +49,8 @@ class CafeListFragment : BaseFragment() {
 
         setToolbarAndBottomNavVisibility(
             toolbarVisibility = View.VISIBLE,
-            bottomNavVisibility = View.GONE
+            bottomNavVisibility = View.VISIBLE
         )
-        setArrowToolbarVisibility(true)
         setToolbarTitle("Кофейни")
         initAdapter()
 

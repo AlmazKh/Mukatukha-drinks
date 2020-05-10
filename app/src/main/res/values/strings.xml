@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Mukatukha Drinks</string>
 
+    <string name="map_page_title">Карта</string>
     <string name="cafe_page_title">Кофейни</string>
-    <string name="special_offer_page_title">Акции</string>
     <string name="basket_page_title">Корзина</string>
-    <string name="notification_page_title">Уведомления</string>
+    <string name="special_offer_page_title">Акции</string>
     <string name="profile_page_title">Профиль</string>
 
     <string name="web_client_id">654790994835-56kkosqeuuo44hj3u124k5gn144kidns.apps.googleusercontent.com</string>
@@ -22,6 +22,7 @@
     <string name="def_user_name">Ваше имя</string>
     <string name="menu_my_data">Мои данные</string>
     <string name="menu_lovely_drinks">Любимые напитки</string>
+    <string name="menu_notification">Уведомления</string>
     <string name="menu_history">История заказов</string>
     <string name="menu_payment_method">Способ оплаты</string>
     <string name="menu_support">Служба поддержки</string>

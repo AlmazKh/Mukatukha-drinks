@@ -1,4 +1,4 @@
-package com.almaz.mukatukha_drinks.ui.cafe
+package com.almaz.mukatukha_drinks.ui.map
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -63,10 +63,6 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
             toolbarVisibility = View.GONE,
             bottomNavVisibility = View.VISIBLE
         )
-
-        fab_cafes_list.setOnClickListener {
-            rootActivity.navController.navigate(R.id.action_mapFragment_to_cafeListFragment)
-        }
     }
 
     private fun init() {

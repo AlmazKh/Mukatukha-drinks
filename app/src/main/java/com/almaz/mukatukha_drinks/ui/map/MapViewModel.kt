@@ -1,4 +1,4 @@
-package com.almaz.mukatukha_drinks.ui.cafe
+package com.almaz.mukatukha_drinks.ui.map
 
 import com.almaz.mukatukha_drinks.ui.base.BaseViewModel
 import javax.inject.Inject

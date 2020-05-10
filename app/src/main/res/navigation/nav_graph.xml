@@ -30,14 +30,9 @@
 
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.almaz.mukatukha_drinks.ui.cafe.MapFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.map.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_google_maps">
-
-        <action
-            android:id="@+id/action_mapFragment_to_cafeListFragment"
-            app:destination="@id/cafeListFragment"
-            app:popUpTo="@id/mapFragment" />
     </fragment>
 
     <fragment
@@ -121,7 +116,7 @@
 
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="com.almaz.mukatukha_drinks.ui.notification.NotificationFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.profile.notification.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification">
 

@@ -5,7 +5,7 @@ import com.almaz.mukatukha_drinks.di.module.CafeModule
 import com.almaz.mukatukha_drinks.di.scope.ScreenScope
 import com.almaz.mukatukha_drinks.ui.cafe.MenuFragment
 import com.almaz.mukatukha_drinks.ui.cafe.CafeListFragment
-import com.almaz.mukatukha_drinks.ui.cafe.MapFragment
+import com.almaz.mukatukha_drinks.ui.map.MapFragment
 import com.almaz.mukatukha_drinks.ui.cafe.ProductListFragment
 import dagger.BindsInstance
 import dagger.Subcomponent
