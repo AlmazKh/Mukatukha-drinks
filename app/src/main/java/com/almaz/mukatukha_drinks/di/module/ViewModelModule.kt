@@ -7,6 +7,7 @@ import com.almaz.mukatukha_drinks.ui.cafe.MapViewModel
 import com.almaz.mukatukha_drinks.ui.cafe.MenuViewModel
 import com.almaz.mukatukha_drinks.ui.login.LoginViewModel
 import com.almaz.mukatukha_drinks.ui.profile.ProfileViewModel
+import com.almaz.mukatukha_drinks.ui.special_offer.SpecialOfferViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -45,6 +46,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(BasketViewModel::class)
     abstract fun bindBasketViewModel(basketViewModel: BasketViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SpecialOfferViewModel::class)
+    abstract fun bindSpecialOfferViewModel(specialOfferViewModel: SpecialOfferViewModel): ViewModel
 }
 
 @Target(

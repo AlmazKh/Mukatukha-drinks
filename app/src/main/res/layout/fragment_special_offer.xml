@@ -1,83 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rv_offers"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv_discounts_title"
-            style="@style/TitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_normal_16"
-            android:layout_marginTop="@dimen/spacing_normal_16"
-            android:text="Скидки"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_discounts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_small_8"
-            android:layout_marginTop="@dimen/spacing_small_8"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/list_item_spacing_half"
-            android:paddingBottom="@dimen/list_item_spacing_half"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_discounts_title" />
-
-        <TextView
-            android:id="@+id/tv_promocodes_title"
-            style="@style/TitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_normal_16"
-            android:layout_marginTop="@dimen/spacing_normal_16"
-            android:text="Промокоды"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rv_discounts" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_promocodes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_small_8"
-            android:layout_marginTop="@dimen/spacing_small_8"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/list_item_spacing_half"
-            android:paddingBottom="@dimen/list_item_spacing_half"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_promocodes_title" />
-
-        <TextView
-            android:id="@+id/tv_happy_hours_title"
-            style="@style/TitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_normal_16"
-            android:layout_marginTop="@dimen/spacing_normal_16"
-            android:text="Счастливые часы"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rv_promocodes" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_happy_hours"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_small_8"
-            android:layout_marginTop="@dimen/spacing_small_8"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/list_item_spacing_half"
-            android:paddingBottom="@dimen/list_item_spacing_half"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_happy_hours_title" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:paddingTop="@dimen/list_item_spacing_half"
+    android:paddingBottom="@dimen/list_item_spacing_half"
+    android:paddingEnd="@dimen/spacing_small_8"
+    android:paddingStart="@dimen/spacing_small_8" />

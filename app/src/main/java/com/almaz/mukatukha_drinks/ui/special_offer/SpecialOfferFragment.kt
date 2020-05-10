@@ -1,11 +1,14 @@
 package com.almaz.mukatukha_drinks.ui.special_offer
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.almaz.itis_booking.utils.ViewModelFactory
 import com.almaz.mukatukha_drinks.App
 import com.almaz.mukatukha_drinks.R
@@ -23,7 +26,7 @@ class SpecialOfferFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.appComponent
-            .cafeComponent()
+            .specialOfferComponent()
             .withActivity(activity as AppCompatActivity)
             .build()
             .inject(this)
@@ -35,8 +38,8 @@ class SpecialOfferFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rv_cafes.apply {
-            layoutManager = LinearLayoutManager(rootView.context)
+        rv_offers.apply {
+            layoutManager = StaggeredGridLayoutManager(2, GridLayoutManager.VERTICAL)
         }
         viewModel = ViewModelProvider(this, this.viewModelFactory)
             .get(SpecialOfferViewModel::class.java)
@@ -49,15 +52,12 @@ class SpecialOfferFragment : BaseFragment() {
         initAdapter()
 
         observeShowLoadingLiveData()
-        observeCafeListLiveData()
-        observeCafeClickLiveData()
+        observeOffersListLiveData()
     }
 
     private fun initAdapter() {
-
-        rv_discounts.adapter =  OffersAdapter()
-        rv_promocodes.adapter =  PromocodeAdapter()
-        rv_happy_hours.adapter = HappyHourAdapter()
+        offersAdapter = OffersAdapter()
+        rv_offers.adapter = offersAdapter
         viewModel.updateOffersList()
     }
 
@@ -68,15 +68,16 @@ class SpecialOfferFragment : BaseFragment() {
             }
         })
 
-    private fun observeCafeListLiveData() =
+    private fun observeOffersListLiveData() =
         viewModel.offersLiveData.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it.data != null) {
-                    cafeAdapter.submitList(it.data)
-                    rv_cafes.adapter = cafeAdapter
+                    offersAdapter.submitList(it.data)
+                    rv_offers.adapter = offersAdapter
                 }
                 if (it.error != null) {
                     showSnackbar(getString(R.string.snackbar_error_message))
                 }
             }
+        })
 }
