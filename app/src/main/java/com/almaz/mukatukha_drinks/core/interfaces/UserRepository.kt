@@ -1,5 +1,6 @@
 package com.almaz.mukatukha_drinks.core.interfaces
 
+import com.almaz.mukatukha_drinks.core.model.User
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import io.reactivex.Completable
 import io.reactivex.Maybe
@@ -17,4 +18,5 @@ interface UserRepository {
 
     fun sendVerificationCode(phoneNumber: String): Maybe<String>
     fun logout(): Completable
+    fun getCurrentUser(): Single<User>
 }

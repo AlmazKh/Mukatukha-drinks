@@ -11,6 +11,7 @@ import com.almaz.itis_booking.utils.ViewModelFactory
 import com.almaz.mukatukha_drinks.App
 import com.almaz.mukatukha_drinks.R
 import com.almaz.mukatukha_drinks.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_basket.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import javax.inject.Inject
 
@@ -43,12 +44,6 @@ class ProfileFragment : BaseFragment() {
         )
         setToolbarTitle(getString(R.string.profile_page_title))
 
-        tv_my_data.setOnClickListener {}
-        tv_lovely_drinks.setOnClickListener {}
-        tv_history.setOnClickListener {}
-        tv_payment_method.setOnClickListener {}
-        tv_support.setOnClickListener {}
-
         btn_logout.setOnClickListener {
             viewModel.logout()
         }
@@ -60,7 +55,20 @@ class ProfileFragment : BaseFragment() {
             .get(ProfileViewModel::class.java)
 
         viewModel.checkAuthUser()
+
+        setUpMenuListeners()
         observeIsLoginedLiveData()
+        observeUserLiveData()
+    }
+
+    private fun setUpMenuListeners() {
+        tv_my_data.setOnClickListener {}
+        tv_lovely_drinks.setOnClickListener {}
+        tv_daily_facts.setOnClickListener {}
+        tv_history.setOnClickListener {}
+        tv_notification.setOnClickListener {}
+        tv_payment_method.setOnClickListener {}
+        tv_support.setOnClickListener {}
     }
 
     private fun observeIsLoginedLiveData() =
@@ -72,6 +80,19 @@ class ProfileFragment : BaseFragment() {
 //                    rootActivity.navController.navigate(R.id.action_loginFragment_to_profileFragment)
                 } else {
                     rootActivity.navController.navigate(R.id.action_profileFragment_to_loginFragment)
+                }
+            }
+        })
+
+    private fun observeUserLiveData() =
+        viewModel.userDataLiveData.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it.data != null) {
+                    tv_user_name.text = it.data.name
+                    tv_discount_value.text = it.data.discountPoints.toString()
+                }
+                if (it.error != null) {
+                    showSnackbar(getString(R.string.snackbar_error_message))
                 }
             }
         })

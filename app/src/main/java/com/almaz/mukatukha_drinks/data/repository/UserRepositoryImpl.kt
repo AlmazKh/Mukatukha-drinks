@@ -3,6 +3,7 @@ package com.almaz.mukatukha_drinks.data.repository
 import android.content.ContentValues
 import android.util.Log
 import com.almaz.mukatukha_drinks.core.interfaces.UserRepository
+import com.almaz.mukatukha_drinks.core.model.User
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.tasks.TaskExecutors
 import com.google.firebase.FirebaseException
@@ -116,6 +117,12 @@ class UserRepositoryImpl
                         emitter.onError(e)
                     }
                 })
+        }
+    }
+
+    override fun getCurrentUser(): Single<User> {
+        return Single.create { emitter ->
+
         }
     }
 }
