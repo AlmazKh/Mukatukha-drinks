@@ -20,4 +20,5 @@ interface AppComponent {
     fun profileComponent(): ProfileComponent.Builder
     fun cafeComponent(): CafeComponent.Builder
     fun basketComponent(): BasketComponent.Builder
+    fun specialOfferComponent(): SpecialOfferComponent.Builder
 }
