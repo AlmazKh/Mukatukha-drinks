@@ -58,13 +58,27 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun setUpMenuListeners() {
-        tv_my_data.setOnClickListener {}
-        tv_lovely_drinks.setOnClickListener {}
-        tv_daily_facts.setOnClickListener {}
-        tv_history.setOnClickListener {}
-        tv_notification.setOnClickListener {}
-        tv_payment_method.setOnClickListener {}
-        tv_support.setOnClickListener {}
+        tv_my_data.setOnClickListener {
+            rootActivity.navController.navigate(R.id.action_profileFragment_to_myDataFragment)
+        }
+        tv_lovely_drinks.setOnClickListener {
+            rootActivity.navController.navigate(R.id.action_profileFragment_to_lovelyDrinksFragment)
+        }
+        tv_daily_facts.setOnClickListener {
+            rootActivity.navController.navigate(R.id.action_profileFragment_to_dailyFactsFragment)
+        }
+        tv_history.setOnClickListener {
+            rootActivity.navController.navigate(R.id.action_profileFragment_to_historyFragment)
+        }
+        tv_notification.setOnClickListener {
+            rootActivity.navController.navigate(R.id.action_profileFragment_to_notificationFragment)
+        }
+        tv_payment_method.setOnClickListener {
+            rootActivity.navController.navigate(R.id.action_profileFragment_to_paymentFragment)
+        }
+        tv_support.setOnClickListener {
+            rootActivity.navController.navigate(R.id.action_profileFragment_to_supportFragment)
+        }
     }
 
     private fun observeAuthenticationState() =

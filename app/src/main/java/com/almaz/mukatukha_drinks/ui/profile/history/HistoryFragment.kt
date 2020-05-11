@@ -21,7 +21,7 @@ class HistoryFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_daily_facts, container, false)
+        return inflater.inflate(R.layout.fragment_history, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

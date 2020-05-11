@@ -32,8 +32,7 @@
         android:id="@+id/mapFragment"
         android:name="com.almaz.mukatukha_drinks.ui.map.MapFragment"
         android:label="fragment_map"
-        tools:layout="@layout/fragment_google_maps">
-    </fragment>
+        tools:layout="@layout/fragment_google_maps" />
 
     <fragment
         android:id="@+id/cafeListFragment"
@@ -88,9 +87,7 @@
         android:id="@+id/specialOfferFragment"
         android:name="com.almaz.mukatukha_drinks.ui.special_offer.SpecialOfferFragment"
         android:label="fragment_special_offer"
-        tools:layout="@layout/fragment_special_offer">
-
-    </fragment>
+        tools:layout="@layout/fragment_special_offer" />
 
     <fragment
         android:id="@+id/basketFragment"
@@ -115,17 +112,112 @@
     </fragment>
 
     <fragment
-        android:id="@+id/notificationFragment"
-        android:name="com.almaz.mukatukha_drinks.ui.profile.notification.NotificationFragment"
-        android:label="fragment_notification"
-        tools:layout="@layout/fragment_notification">
-
-    </fragment>
-
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.almaz.mukatukha_drinks.ui.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile">
+        tools:layout="@layout/fragment_profile" >
+
+        <action
+            android:id="@+id/action_profileFragment_to_dailyFactsFragment"
+            app:destination="@id/dailyFactsFragment"
+            app:popUpTo="@id/profileFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/action_profileFragment_to_historyFragment"
+            app:destination="@id/historyFragment"
+            app:popUpTo="@id/profileFragment"
+             />
+
+        <action
+            android:id="@+id/action_profileFragment_to_lovelyDrinksFragment"
+            app:destination="@id/lovelyDrinksFragment"
+            app:popUpTo="@id/profileFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/action_profileFragment_to_myDataFragment"
+            app:destination="@id/myDataFragment"
+            app:popUpTo="@id/profileFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/action_profileFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment"
+            app:popUpTo="@id/profileFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/action_profileFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment"
+            app:popUpTo="@id/profileFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/action_profileFragment_to_supportFragment"
+            app:destination="@id/supportFragment"
+            app:popUpTo="@id/profileFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
+
+    <!--    Profile menu-->
+    <fragment
+        android:id="@+id/dailyFactsFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.profile.daily_facts.DailyFactsFragment"
+        android:label="fragment_daily_facts"
+        tools:layout="@layout/fragment_daily_facts" />
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.profile.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
+
+    <fragment
+        android:id="@+id/lovelyDrinksFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.profile.lovely_drinks.LovelyDrinksFragment"
+        android:label="fragment_lovely_drinks"
+        tools:layout="@layout/fragment_lovely_drinks" />
+
+    <fragment
+        android:id="@+id/myDataFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.profile.my_data.MyDataFragment"
+        android:label="fragment_user_data"
+        tools:layout="@layout/fragment_user_data" />
+
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.profile.notification.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.profile.payment_method.PaymentFragment"
+        android:label="fragment_payment_method"
+        tools:layout="@layout/fragment_payment_method" />
+
+    <fragment
+        android:id="@+id/supportFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.profile.support.SupportFragment"
+        android:label="fragment_support"
+        tools:layout="@layout/fragment_support" />
 </navigation>
