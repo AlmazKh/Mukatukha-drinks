@@ -11,7 +11,7 @@ import com.almaz.itis_booking.utils.ViewModelFactory
 import com.almaz.mukatukha_drinks.App
 import com.almaz.mukatukha_drinks.R
 import com.almaz.mukatukha_drinks.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_basket.*
+import com.almaz.mukatukha_drinks.utils.AuthenticationState
 import kotlinx.android.synthetic.main.fragment_profile.*
 import javax.inject.Inject
 
@@ -31,9 +31,10 @@ class ProfileFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_profile, container, false)
-        init()
-        return v
+        viewModel = ViewModelProvider(rootActivity, this.viewModeFactory)
+            .get(ProfileViewModel::class.java)
+
+        return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,20 +45,15 @@ class ProfileFragment : BaseFragment() {
         )
         setToolbarTitle(getString(R.string.profile_page_title))
 
+        setUpMenuListeners()
         btn_logout.setOnClickListener {
             viewModel.logout()
         }
         text_input_layout_share.setOnClickListener {}
-    }
 
-    private fun init() {
-        viewModel = ViewModelProvider(this, this.viewModeFactory)
-            .get(ProfileViewModel::class.java)
 
-        viewModel.checkAuthUser()
 
-        setUpMenuListeners()
-        observeIsLoginedLiveData()
+        observeAuthenticationState()
         observeUserLiveData()
     }
 
@@ -71,15 +67,17 @@ class ProfileFragment : BaseFragment() {
         tv_support.setOnClickListener {}
     }
 
-    private fun observeIsLoginedLiveData() =
-        viewModel.isLoginedLiveData.observe(viewLifecycleOwner, Observer { response ->
-            if (response.data != null) {
-                if (response.data) {
-                    showSnackbar("Welcome to your Profile")
-                    //TODO: set up data like name and points
-//                    rootActivity.navController.navigate(R.id.action_loginFragment_to_profileFragment)
-                } else {
-                    rootActivity.navController.navigate(R.id.action_profileFragment_to_loginFragment)
+    private fun observeAuthenticationState() =
+        viewModel.authenticationState.observe(viewLifecycleOwner, Observer { authState ->
+            if (authState != null) {
+                when (authState) {
+                    AuthenticationState.UNAUTHENTICATED -> {
+                        rootActivity.navController.navigate(R.id.loginFragment)
+                    }
+                    AuthenticationState.AUTHENTICATED -> {
+                        viewModel.updateUserInfo()
+                    }
+                    AuthenticationState.INVALID_AUTHENTICATION -> { }
                 }
             }
         })
@@ -89,7 +87,7 @@ class ProfileFragment : BaseFragment() {
             it?.let {
                 if (it.data != null) {
                     tv_user_name.text = it.data.name
-                    tv_discount_value.text = it.data.discountPoints.toString()
+                    tv_points_title.text = it.data.discountPoints.toString()
                 }
                 if (it.error != null) {
                     showSnackbar(getString(R.string.snackbar_error_message))

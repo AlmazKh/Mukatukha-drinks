@@ -13,12 +13,12 @@
 
         <action
             android:id="@+id/action_loginFragment_to_loginWithPhoneFragment"
-            app:destination="@id/loginWihPhoneFragment"
-            app:popUpTo="@id/profileFragment"/>
+            app:destination="@id/loginWithPhoneFragment"
+            app:popUpTo="@id/loginFragment"/>
     </fragment>
 
     <fragment
-        android:id="@+id/loginWihPhoneFragment"
+        android:id="@+id/loginWithPhoneFragment"
         android:name="com.almaz.mukatukha_drinks.ui.login.LoginWithPhoneFragment"
         android:label="login_with_phone"
         tools:layout="@layout/fragment_login_phone">
@@ -127,13 +127,5 @@
         android:name="com.almaz.mukatukha_drinks.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile">
-
-        <action
-            android:id="@+id/action_profileFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popUpTo="@id/profileFragment"
-            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

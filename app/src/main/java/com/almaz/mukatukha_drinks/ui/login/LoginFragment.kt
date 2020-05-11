@@ -14,6 +14,8 @@ import com.almaz.mukatukha_drinks.App
 import com.almaz.mukatukha_drinks.R
 import com.almaz.mukatukha_drinks.ui.base.BaseFragment
 import com.almaz.mukatukha_drinks.ui.login.LoginViewModel.Companion.RC_SIGN_IN
+import com.almaz.mukatukha_drinks.ui.profile.ProfileViewModel
+import com.almaz.mukatukha_drinks.utils.AuthenticationState
 import com.almaz.mukatukha_drinks.utils.LoginState
 import com.almaz.mukatukha_drinks.utils.ScreenState
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -25,6 +27,7 @@ class LoginFragment : BaseFragment() {
     @Inject
     lateinit var viewModeFactory: ViewModelFactory
     private lateinit var viewModel: LoginViewModel
+    private lateinit var profileViewModel: ProfileViewModel
     @Inject
     lateinit var googleSignInClient: GoogleSignInClient
 
@@ -57,6 +60,9 @@ class LoginFragment : BaseFragment() {
 
         viewModel = ViewModelProvider(this, this.viewModeFactory)
             .get(LoginViewModel::class.java)
+        profileViewModel = ViewModelProvider(rootActivity, this.viewModeFactory)
+            .get(ProfileViewModel::class.java)
+
         view.btn_login_by_google.setOnClickListener { onGoogleSignInClick() }
         view.btn_login_by_phone.setOnClickListener { onPhoneSignInClick() }
 
@@ -100,17 +106,18 @@ class LoginFragment : BaseFragment() {
         rootActivity.showLoading(false)
         when (renderState) {
             LoginState.SUCCESS_LOGIN -> {
-                // TODO: fix visibility data setting
+                profileViewModel.authenticationState.value = AuthenticationState.AUTHENTICATED
                 showSnackbar("Welcome back to Mukatukha Drinks!")
-                rootActivity.navController
-                    .navigateUp()
+                rootActivity.navController.popBackStack()
             }
             LoginState.SUCCESS_REGISTER -> {
+                profileViewModel.authenticationState.value = AuthenticationState.AUTHENTICATED
                 showSnackbar("Welcome to Mukatukha Drinks!")
-                rootActivity.navController
-                    .navigateUp()
+                rootActivity.navController.popBackStack()
             }
             LoginState.ERROR -> view?.let {
+                profileViewModel.authenticationState.value =
+                    AuthenticationState.INVALID_AUTHENTICATION
                 showSnackbar(getString(R.string.snackbar_error_message))
             }
         }

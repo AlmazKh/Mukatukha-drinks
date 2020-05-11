@@ -11,6 +11,8 @@ import com.almaz.itis_booking.utils.ViewModelFactory
 import com.almaz.mukatukha_drinks.App
 import com.almaz.mukatukha_drinks.R
 import com.almaz.mukatukha_drinks.ui.base.BaseFragment
+import com.almaz.mukatukha_drinks.ui.profile.ProfileViewModel
+import com.almaz.mukatukha_drinks.utils.AuthenticationState
 import com.almaz.mukatukha_drinks.utils.LoginState
 import com.almaz.mukatukha_drinks.utils.ScreenState
 import kotlinx.android.synthetic.main.fragment_login_phone.*
@@ -21,6 +23,7 @@ class LoginWithPhoneFragment : BaseFragment() {
     @Inject
     lateinit var viewModeFactory: ViewModelFactory
     private lateinit var viewModel: LoginViewModel
+    private lateinit var profileViewModel: ProfileViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +47,8 @@ class LoginWithPhoneFragment : BaseFragment() {
     private fun init(view: View) {
         viewModel = ViewModelProvider(this, this.viewModeFactory)
             .get(LoginViewModel::class.java)
+        profileViewModel = ViewModelProvider(rootActivity, this.viewModeFactory)
+            .get(ProfileViewModel::class.java)
 
         sendCode()
         view.btn_send_code.setOnClickListener {
@@ -89,14 +94,18 @@ class LoginWithPhoneFragment : BaseFragment() {
         rootActivity.showLoading(false)
         when (renderState) {
             LoginState.SUCCESS_LOGIN -> {
+                profileViewModel.authenticationState.value = AuthenticationState.AUTHENTICATED
                 showSnackbar("Welcome back to Mukatukha Drinks!")
-                rootActivity.navController.navigateUp()
+                rootActivity.navController.popBackStack(R.id.profileFragment, false)
             }
             LoginState.SUCCESS_REGISTER -> {
+                profileViewModel.authenticationState.value = AuthenticationState.AUTHENTICATED
                 showSnackbar("Welcome to Mukatukha Drinks!")
-                rootActivity.navController.navigateUp()
+                rootActivity.navController.popBackStack(R.id.profileFragment, false)
             }
             LoginState.ERROR -> view?.let {
+                profileViewModel.authenticationState.value =
+                    AuthenticationState.INVALID_AUTHENTICATION
                 showSnackbar(getString(R.string.snackbar_error_message))
             }
         }
