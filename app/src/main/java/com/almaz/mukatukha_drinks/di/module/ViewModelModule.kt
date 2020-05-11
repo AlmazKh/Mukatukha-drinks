@@ -3,10 +3,11 @@ package com.almaz.mukatukha_drinks.di.module
 import androidx.lifecycle.ViewModel
 import com.almaz.mukatukha_drinks.ui.basket.BasketViewModel
 import com.almaz.mukatukha_drinks.ui.cafe.CafeListViewModel
-import com.almaz.mukatukha_drinks.ui.map.MapViewModel
 import com.almaz.mukatukha_drinks.ui.cafe.MenuViewModel
 import com.almaz.mukatukha_drinks.ui.login.LoginViewModel
+import com.almaz.mukatukha_drinks.ui.map.MapViewModel
 import com.almaz.mukatukha_drinks.ui.profile.ProfileViewModel
+import com.almaz.mukatukha_drinks.ui.profile.daily_facts.DailyFactsViewModel
 import com.almaz.mukatukha_drinks.ui.special_offer.SpecialOfferViewModel
 import dagger.Binds
 import dagger.MapKey
@@ -51,6 +52,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SpecialOfferViewModel::class)
     abstract fun bindSpecialOfferViewModel(specialOfferViewModel: SpecialOfferViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DailyFactsViewModel::class)
+    abstract fun bindDailyFactsViewModel(dailyFactsViewModel: DailyFactsViewModel): ViewModel
 }
 
 @Target(

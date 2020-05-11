@@ -10,9 +10,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
 class ProfileViewModel
-    @Inject constructor(
+@Inject constructor(
         private val profileInteractor: ProfileInteractor
-    ): BaseViewModel() {
+) : BaseViewModel() {
 
     val authenticationState  = MutableLiveData<AuthenticationState>()
     val userDataLiveData = MutableLiveData<Response<User>>()

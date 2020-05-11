@@ -27,4 +27,8 @@ interface RepoModule {
     @Binds
     @Singleton
     fun bindSpecialOfferRepository(specialOfferRepositoryImpl: SpecialOfferRepositoryImpl): SpecialOfferRepository
+
+    @Binds
+    @Singleton
+    fun bindProfileMenuRepository(profileMenuRepositoryImpl: ProfileMenuRepositoryImpl): ProfileMenuRepository
 }

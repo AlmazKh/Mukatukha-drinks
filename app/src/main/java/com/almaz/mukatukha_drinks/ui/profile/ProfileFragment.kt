@@ -44,14 +44,13 @@ class ProfileFragment : BaseFragment() {
             bottomNavVisibility = View.VISIBLE
         )
         setToolbarTitle(getString(R.string.profile_page_title))
+        setArrowToolbarVisibility(false)
 
         setUpMenuListeners()
         btn_logout.setOnClickListener {
             viewModel.logout()
         }
         text_input_layout_share.setOnClickListener {}
-
-
 
         observeAuthenticationState()
         observeUserLiveData()
