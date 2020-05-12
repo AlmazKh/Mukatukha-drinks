@@ -1,18 +1,22 @@
 package com.almaz.mukatukha_drinks.data.db
 
 import androidx.room.*
+import com.almaz.mukatukha_drinks.core.model.db.BasketAndProduct
 import com.almaz.mukatukha_drinks.core.model.db.BasketDB
+import com.almaz.mukatukha_drinks.core.model.db.ProductDB
 import io.reactivex.Single
 
 @Dao
 interface BasketDao {
 
     @Query("SELECT * FROM basket")
-    fun getItemsFromBasket(): Single<List<BasketDB>>
+    fun getItemsFromBasket(): Single<List<BasketAndProduct>>
 
+    @Transaction
     @Query("SELECT * FROM basket WHERE product_id = :productId")
-    fun getProductById(productId: Long): Single<BasketDB?>
+    fun getProductById(productId: Long): Single<BasketAndProduct>
 
+    @Transaction
     @Query("SELECT amount FROM basket WHERE product_id = :productId")
     fun getProductAmountById(productId: Long): Int?
 
@@ -28,4 +32,6 @@ interface BasketDao {
     @Delete
     fun delete(item: BasketDB)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertProduct(product: ProductDB)
 }

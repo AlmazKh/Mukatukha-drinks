@@ -17,10 +17,10 @@ class MenuViewModel
     val productListLiveData = MutableLiveData<Response<List<Product>>>()
     val productClickLiveData = MutableLiveData<Response<Product>>()
 
-    fun updateProductList(productCategory: ProductCategory, withMilk: Boolean) {
+    fun updateProductList(cafeId: String, productCategory: ProductCategory, withMilk: Boolean) {
         showLoadingLiveData.value = true
         disposables.add(
-            menuInteractor.getProductList(productCategory, withMilk)
+            menuInteractor.getProductList(cafeId, productCategory, withMilk)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doAfterTerminate {
                     showLoadingLiveData.value = false

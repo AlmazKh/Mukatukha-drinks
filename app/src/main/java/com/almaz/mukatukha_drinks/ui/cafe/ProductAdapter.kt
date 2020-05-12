@@ -49,7 +49,7 @@ class ProductAdapter(
         fun bind(product: Product) {
             itemView.tv_product_name.text = product.name
             itemView.tv_volume.text = product.volume
-            itemView.tv_price.text = product.price
+            itemView.tv_price.text = product.price.toString()
             /*when (itemView.tv_product_amount_counter.text.first()) {
                 '0' -> itemView.btn_remove_from_basket.isClickable = false
                 else -> itemView.btn_remove_from_basket.isClickable = true

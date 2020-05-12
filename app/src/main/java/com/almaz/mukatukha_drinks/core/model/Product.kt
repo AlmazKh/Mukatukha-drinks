@@ -7,9 +7,9 @@ import kotlinx.android.parcel.Parcelize
 data class Product(
     val id: String,
     val name: String,
-    val price: String,
+    val price: Double,
     val volume: String,
-    val category: ProductCategory,
-    val withMilk: Boolean,
+    val category: ProductCategory?,
+    val withMilk: Boolean?,
     val otherDetails: String?
 ): Parcelable

@@ -3,8 +3,10 @@ package com.almaz.mukatukha_drinks.ui.basket
 import androidx.lifecycle.MutableLiveData
 import com.almaz.mukatukha_drinks.core.interactors.BasketInteractor
 import com.almaz.mukatukha_drinks.core.interactors.MenuInteractor
+import com.almaz.mukatukha_drinks.core.model.Basket
 import com.almaz.mukatukha_drinks.core.model.Order
 import com.almaz.mukatukha_drinks.core.model.Product
+import com.almaz.mukatukha_drinks.core.model.db.BasketAndProduct
 import com.almaz.mukatukha_drinks.ui.base.BaseViewModel
 import com.almaz.mukatukha_drinks.utils.Response
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,7 +19,7 @@ class BasketViewModel
 ) : BaseViewModel() {
 
     val orderStatusLiveData = MutableLiveData<Response<Order>>()
-    val productListLiveData = MutableLiveData<Response<List<Pair<Product, Int>>>>()
+    val productListLiveData = MutableLiveData<Response<List<Basket>>>()
     val productClickLiveData = MutableLiveData<Response<Product>>()
 
     fun updateBasketProductList() {

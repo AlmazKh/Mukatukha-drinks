@@ -1,6 +1,7 @@
 package com.almaz.mukatukha_drinks.core.model.db
 
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -9,9 +10,9 @@ data class BasketDB(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Long = 0,
-    @ColumnInfo(name = "product_id")
-    val productId: Long,
     val amount: Int = 0,
     @ColumnInfo(name = "owner_id")
-    val ownerId: Long
-)
+    val ownerId: Long,
+    @ColumnInfo(name = "product_id")
+    val productId: Long
+    )

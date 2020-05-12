@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.almaz.itis_booking.utils.ViewModelFactory
 import com.almaz.mukatukha_drinks.App
 import com.almaz.mukatukha_drinks.R
+import com.almaz.mukatukha_drinks.core.model.Cafe
 import com.almaz.mukatukha_drinks.core.model.ProductCategory
 import com.almaz.mukatukha_drinks.ui.base.BaseFragment
 import com.google.android.material.tabs.TabLayout
@@ -51,10 +52,12 @@ class MenuFragment : BaseFragment() {
             .get(MenuViewModel::class.java)
 
         viewModel.updateProductList(
+            arguments?.getParcelable<Cafe>("cafe")?.id!!,
             when (tabs_drinks_type.selectedTabPosition) {
-                1 -> ProductCategory.OTHER_DRINKS
+                1 -> ProductCategory.OTHERS
                 else -> ProductCategory.COFFEE
-            }, switch_with_milk.isChecked
+            },
+            switch_with_milk.isChecked
         )
 
         menuViewPagerAdapter = MenuViewPagerAdapter(this)
@@ -92,14 +95,22 @@ class MenuFragment : BaseFragment() {
             TabLayoutMediator.TabConfigurationStrategy { tab, position ->
                 when (position) {
                     0 -> tab.text = ProductCategory.COFFEE.getStringValue()
-                    1 -> tab.text = ProductCategory.OTHER_DRINKS.getStringValue()
+                    1 -> tab.text = ProductCategory.OTHERS.getStringValue()
                 }
             }).attach()
 
         switch_with_milk.setOnCheckedChangeListener { _, isChecked ->
             when (tabs_drinks_type.selectedTabPosition) {
-                0 -> viewModel.updateProductList(ProductCategory.COFFEE, isChecked)
-                1 -> viewModel.updateProductList(ProductCategory.OTHER_DRINKS, isChecked)
+                0 -> viewModel.updateProductList(
+                    arguments?.getParcelable<Cafe>("cafe")?.id!!,
+                    ProductCategory.COFFEE,
+                    isChecked
+                )
+                1 -> viewModel.updateProductList(
+                    arguments?.getParcelable<Cafe>("cafe")?.id!!,
+                    ProductCategory.OTHERS,
+                    isChecked
+                )
             }
         }
 
@@ -111,11 +122,13 @@ class MenuFragment : BaseFragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
                     0 -> viewModel.updateProductList(
+                        arguments?.getParcelable<Cafe>("cafe")?.id!!,
                         ProductCategory.COFFEE,
                         switch_with_milk.isChecked
                     )
                     1 -> viewModel.updateProductList(
-                        ProductCategory.OTHER_DRINKS,
+                        arguments?.getParcelable<Cafe>("cafe")?.id!!,
+                        ProductCategory.OTHERS,
                         switch_with_milk.isChecked
                     )
                 }

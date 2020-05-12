@@ -4,7 +4,7 @@ enum class ProductCategory: CategoryValue {
     COFFEE {
         override fun getStringValue(): String = "Кофе"
     },
-    OTHER_DRINKS {
+    OTHERS {
         override fun getStringValue(): String = "Другие напитки"
     }
 }

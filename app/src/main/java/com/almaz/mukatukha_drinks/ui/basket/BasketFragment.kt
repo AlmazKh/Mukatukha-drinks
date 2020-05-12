@@ -140,9 +140,9 @@ class BasketFragment : BaseFragment() {
     private fun initAdapter() {
         basketProductAdapter = BasketProductAdapter {
             when (it.first) {
-                EVENT_KEY_PRODUCT -> viewModel.onProductClick(it.second)
-                EVENT_KEY_ADD -> viewModel.onAddProductClick(it.second)
-                EVENT_KEY_REMOVE -> viewModel.onRemoveProductClick(it.second)
+                EVENT_KEY_PRODUCT -> viewModel.onProductClick(it.second.product)
+                EVENT_KEY_ADD -> viewModel.onAddProductClick(it.second.product)
+                EVENT_KEY_REMOVE -> viewModel.onRemoveProductClick(it.second.product)
             }
         }
         rv_basket_product.adapter = basketProductAdapter
