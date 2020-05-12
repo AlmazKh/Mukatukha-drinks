@@ -20,7 +20,7 @@
     <TextView
         android:id="@+id/tv_my_data"
         style="@style/ProfileMenuText"
-        android:drawableStart="@drawable/ic_notifications_none_black_24dp"
+        android:drawableStart="@drawable/ic_face_black_24dp"
         android:text="@string/menu_my_data"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
@@ -28,7 +28,7 @@
     <TextView
         android:id="@+id/tv_lovely_drinks"
         style="@style/ProfileMenuText"
-        android:drawableStart="@drawable/ic_notifications_none_black_24dp"
+        android:drawableStart="@drawable/ic_favorite_border_black_24dp"
         android:text="@string/menu_lovely_drinks"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_my_data" />
@@ -36,7 +36,7 @@
     <TextView
         android:id="@+id/tv_daily_facts"
         style="@style/ProfileMenuText"
-        android:drawableStart="@drawable/ic_notifications_none_black_24dp"
+        android:drawableStart="@drawable/ic_free_breakfast_black_24dp"
         android:text="@string/menu_daily_facts"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_lovely_drinks" />
@@ -44,7 +44,7 @@
     <TextView
         android:id="@+id/tv_history"
         style="@style/ProfileMenuText"
-        android:drawableStart="@drawable/ic_notifications_none_black_24dp"
+        android:drawableStart="@drawable/ic_access_time_black_24dp"
         android:text="@string/menu_history"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_daily_facts" />
@@ -60,7 +60,7 @@
     <TextView
         android:id="@+id/tv_payment_method"
         style="@style/ProfileMenuText"
-        android:drawableStart="@drawable/ic_notifications_none_black_24dp"
+        android:drawableStart="@drawable/ic_credit_card_black_24dp"
         android:text="@string/menu_payment_method"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_notification" />
@@ -68,7 +68,7 @@
     <TextView
         android:id="@+id/tv_support"
         style="@style/ProfileMenuText"
-        android:drawableStart="@drawable/ic_notifications_none_black_24dp"
+        android:drawableStart="@drawable/ic_help_outline_black_24dp"
         android:text="@string/menu_support"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_payment_method" />
