@@ -1,5 +1,6 @@
 package com.almaz.mukatukha_drinks.di.module
 
+import com.almaz.mukatukha_drinks.data.MukatukhaAPI
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -10,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 class NetModule {
     @Provides
-    fun provideBaseUrl() = "http://192.168.1.4:8080/"
+    fun provideBaseUrl() = "http://192.168.1.7:8080/"
 
     @Provides
     fun provideConverterFactory(): GsonConverterFactory =
@@ -30,7 +31,7 @@ class NetModule {
         .addCallAdapterFactory(callAdapterFactory)
         .build()
 
-    /*@Provides
-    fun provideApi(retrofit: Retrofit): Api =
-        retrofit.create(Api::class.java)*/
+    @Provides
+    fun provideMukatukhaApi(retrofit: Retrofit): MukatukhaAPI =
+        retrofit.create(MukatukhaAPI::class.java)
 }
