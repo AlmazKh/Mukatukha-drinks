@@ -7,17 +7,17 @@
 
     <item
         android:id="@+id/cafeListFragment"
-        android:icon="@drawable/ic_nav_special_offer"
+        android:icon="@drawable/ic_nav_cafe"
         android:title="@string/cafe_page_title" />
 
     <item
-        android:id="@+id/basketFragment"
+        android:id="@+id/emptyBasketFragment"
         android:icon="@drawable/ic_nav_basket"
         android:title="@string/basket_page_title" />
 
     <item
         android:id="@+id/specialOfferFragment"
-        android:icon="@drawable/ic_nav_cafe"
+        android:icon="@drawable/ic_nav_special_offer"
         android:title="@string/special_offer_page_title" />
 
     <item

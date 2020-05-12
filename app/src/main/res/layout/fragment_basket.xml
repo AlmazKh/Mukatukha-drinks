@@ -6,7 +6,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_basket_unpaid">
 
         <TextView
             android:id="@+id/tv_order_details"
@@ -50,8 +51,6 @@
             android:paddingTop="@dimen/list_item_spacing_half"
             android:paddingBottom="@dimen/list_item_spacing_half"
             app:layout_constraintTop_toBottomOf="@id/tv_cafe_address" />
-        <!--tools:context=".ui.basket.BasketFragment"
-        tools:listitem="@layout/item_basket_product"-->
 
         <TextView
             android:id="@+id/tv_cost_title"

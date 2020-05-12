@@ -64,7 +64,7 @@ class BasketFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(rootView.context)
             addItemDecoration(DividerItemDecoration(rootView.context, HORIZONTAL))
         }
-        viewModel = ViewModelProvider(this, this.viewModelFactory)
+        viewModel = ViewModelProvider(rootActivity, this.viewModelFactory)
             .get(BasketViewModel::class.java)
 
         setToolbarAndBottomNavVisibility(
@@ -73,8 +73,7 @@ class BasketFragment : BaseFragment() {
         )
         setArrowToolbarVisibility(false)
         setToolbarTitle("Ваши заказы")
-        // TODO
-        //viewModel.checkHasActiveOrder()
+
 
         initGooglePay()
         initAdapter()
@@ -83,7 +82,9 @@ class BasketFragment : BaseFragment() {
         btn_make_order.setOnClickListener {
             if (checkFields()) {
                 viewModel.makeOrder(
-                    et_phone_number.text.toString()
+                    phoneNumber = et_phone_number.text.toString(),
+                    paymentMethod = spinner_payment_method.selectedItem.toString(),
+                    promocode = et_promocode.text.toString()
                 )
             }
         }

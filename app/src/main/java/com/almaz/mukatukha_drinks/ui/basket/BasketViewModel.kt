@@ -6,8 +6,8 @@ import com.almaz.mukatukha_drinks.core.interactors.MenuInteractor
 import com.almaz.mukatukha_drinks.core.model.Basket
 import com.almaz.mukatukha_drinks.core.model.Order
 import com.almaz.mukatukha_drinks.core.model.Product
-import com.almaz.mukatukha_drinks.core.model.db.BasketAndProduct
 import com.almaz.mukatukha_drinks.ui.base.BaseViewModel
+import com.almaz.mukatukha_drinks.utils.BasketState
 import com.almaz.mukatukha_drinks.utils.Response
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
@@ -18,6 +18,7 @@ class BasketViewModel
     private val basketInteractor: BasketInteractor
 ) : BaseViewModel() {
 
+    val basketState = MutableLiveData<BasketState>()
     val orderStatusLiveData = MutableLiveData<Response<Order>>()
     val productListLiveData = MutableLiveData<Response<List<Basket>>>()
     val productClickLiveData = MutableLiveData<Response<Product>>()
@@ -67,14 +68,49 @@ class BasketViewModel
         )
     }
 
-    fun makeOrder(phoneNumber: String) {
+    fun makeOrder(
+        phoneNumber: String,
+        paymentMethod: String,
+        promocode: String?
+    ) {
         disposables.add(
-            basketInteractor.makeOrder(phoneNumber)
+            basketInteractor.makeOrder(
+                phoneNumber,
+                paymentMethod,
+                promocode
+            )
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
+                    basketState.value = BasketState.HAS_ACTIVE_ORDER
                     orderStatusLiveData.value = Response.success(it)
                 }, {
                     orderStatusLiveData.value = Response.error(it)
+                    it.printStackTrace()
+                })
+        )
+    }
+
+    fun checkBasketState() {
+        disposables.add(
+            basketInteractor.checkHasActiveOrder()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    if (it) {
+                        basketState.value = BasketState.HAS_ACTIVE_ORDER
+                    } else {
+                        basketInteractor.checkHasProductsInBasket()
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({
+                                if (it) {
+                                    basketState.value = BasketState.NOT_EMPTY
+                                } else {
+                                    basketState.value = BasketState.EMPTY
+                                }
+                            }, { error ->
+                                error.printStackTrace()
+                            })
+                    }
+                }, {
                     it.printStackTrace()
                 })
         )

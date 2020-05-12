@@ -10,5 +10,5 @@ data class Order (
     val time: String,
     val cafe: Cafe,
     val products: Map<Product, Int>,
-    val totalCost: Float
+    val totalCost: Double
 ) : Parcelable

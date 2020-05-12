@@ -90,6 +90,12 @@
         tools:layout="@layout/fragment_special_offer" />
 
     <fragment
+        android:id="@+id/emptyBasketFragment"
+        android:name="com.almaz.mukatukha_drinks.ui.basket.EmptyBasketFragment"
+        android:label="fragment_empty_basket"
+        tools:layout="@layout/fragment_empty_basket" />
+
+    <fragment
         android:id="@+id/basketFragment"
         android:name="com.almaz.mukatukha_drinks.ui.basket.BasketFragment"
         android:label="fragment_basket"

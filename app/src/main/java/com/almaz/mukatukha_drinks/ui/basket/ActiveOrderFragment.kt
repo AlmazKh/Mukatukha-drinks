@@ -38,7 +38,7 @@ class ActiveOrderFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this, this.viewModelFactory)
+        viewModel = ViewModelProvider(rootActivity, this.viewModelFactory)
             .get(BasketViewModel::class.java)
 
         setToolbarAndBottomNavVisibility(
@@ -46,7 +46,7 @@ class ActiveOrderFragment : BaseFragment() {
             bottomNavVisibility = View.VISIBLE
         )
         setArrowToolbarVisibility(false)
-        setToolbarTitle("Ваши заказы")
+        setToolbarTitle("Ваш заказ")
     }
 
 }

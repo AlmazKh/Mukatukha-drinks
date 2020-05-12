@@ -6,6 +6,7 @@ import com.almaz.mukatukha_drinks.di.module.BasketModule
 import com.almaz.mukatukha_drinks.di.scope.ScreenScope
 import com.almaz.mukatukha_drinks.ui.basket.ActiveOrderFragment
 import com.almaz.mukatukha_drinks.ui.basket.BasketFragment
+import com.almaz.mukatukha_drinks.ui.basket.EmptyBasketFragment
 import com.almaz.mukatukha_drinks.ui.login.LoginFragment
 import dagger.BindsInstance
 import dagger.Subcomponent
@@ -27,4 +28,5 @@ interface BasketComponent {
 
     fun inject(basketFragment: BasketFragment)
     fun inject(activeOrderFragment: ActiveOrderFragment)
+    fun inject(emptyBasketFragment: EmptyBasketFragment)
 }
