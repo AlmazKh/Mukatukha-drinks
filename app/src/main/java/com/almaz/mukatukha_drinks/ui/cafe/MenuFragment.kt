@@ -26,8 +26,6 @@ class MenuFragment : BaseFragment() {
     private lateinit var viewModel: MenuViewModel
     private lateinit var menuViewPagerAdapter: MenuViewPagerAdapter
 
-    private var listenersSettingUp = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.appComponent
@@ -75,6 +73,11 @@ class MenuFragment : BaseFragment() {
     override fun onPause() {
         super.onPause()
         setToolbarElevation(4F)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        setArrowToolbarVisibility(false)
     }
 
     private fun observeShowLoadingLiveData() =

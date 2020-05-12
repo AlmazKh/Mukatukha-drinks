@@ -2,7 +2,6 @@ package com.almaz.mukatukha_drinks.ui.cafe
 
 import android.os.Bundle
 import android.view.*
-import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
@@ -23,6 +22,7 @@ class CafeListFragment : BaseFragment() {
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: CafeListViewModel
     private lateinit var cafeAdapter: CafeAdapter
+    private lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +62,7 @@ class CafeListFragment : BaseFragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.toollbar_with_search, menu)
-        val searchView = menu.findItem(R.id.action_search).actionView as SearchView
+        searchView = menu.findItem(R.id.action_search).actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
