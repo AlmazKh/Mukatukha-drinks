@@ -4,6 +4,8 @@ import android.content.ContentValues
 import android.util.Log
 import com.almaz.mukatukha_drinks.core.interfaces.UserRepository
 import com.almaz.mukatukha_drinks.core.model.User
+import com.almaz.mukatukha_drinks.core.model.remote.UserRemote
+import com.almaz.mukatukha_drinks.data.MukatukhaAPI
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.tasks.TaskExecutors
 import com.google.firebase.FirebaseException
@@ -12,18 +14,16 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 import io.reactivex.Completable
-import io.reactivex.Flowable.just
 import io.reactivex.Maybe
-import io.reactivex.Observable
-import io.reactivex.Observable.just
 import io.reactivex.Single
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class UserRepositoryImpl
 @Inject constructor(
-        private val firebaseAuth: FirebaseAuth,
-        private val phoneAuthProvider: PhoneAuthProvider
+    private val firebaseAuth: FirebaseAuth,
+    private val phoneAuthProvider: PhoneAuthProvider,
+    private val api: MukatukhaAPI
 ) : UserRepository {
 
     override fun checkAuthUser(): Single<Boolean> = Single.just(firebaseAuth.currentUser != null)
@@ -122,7 +122,37 @@ class UserRepositoryImpl
 
     override fun getCurrentUser(): Single<User> {
         return Single.create { emitter ->
-
+            val firebaseUser = firebaseAuth.currentUser
+            if (firebaseUser != null) {
+                if (firebaseUser.email != null) {
+                    api.getUserByEmail(firebaseUser.email!!)
+                        .map {
+                            emitter.onSuccess(mapRemoteUserToLocal(it))
+                        }
+                } else {
+                    api.getUserByPhone(firebaseUser.phoneNumber!!)
+                        .map {
+                            emitter.onSuccess(mapRemoteUserToLocal(it))
+                        }
+                }
+            } else {
+                emitter.onSuccess(
+                    User(
+                        name = null,
+                        phoneNumber = null,
+                        email = null
+                    )
+                )
+            }
         }
     }
+
+    private fun mapRemoteUserToLocal(remote: UserRemote): User =
+        User(
+            remote.id,
+            remote.name,
+            remote.phoneNumber,
+            remote.email,
+            remote.discountPoints
+        )
 }
