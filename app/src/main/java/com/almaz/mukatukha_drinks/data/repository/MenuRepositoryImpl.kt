@@ -3,6 +3,7 @@ package com.almaz.mukatukha_drinks.data.repository
 import com.almaz.mukatukha_drinks.core.interfaces.MenuRepository
 import com.almaz.mukatukha_drinks.core.model.Product
 import com.almaz.mukatukha_drinks.core.model.ProductCategory
+import com.almaz.mukatukha_drinks.core.model.User
 import com.almaz.mukatukha_drinks.core.model.db.BasketDB
 import com.almaz.mukatukha_drinks.core.model.db.ProductDB
 import com.almaz.mukatukha_drinks.core.model.remote.ProductRemote
@@ -35,14 +36,14 @@ class MenuRepositoryImpl
         )
     }
 
-    override fun addProductIntoBasket(product: Product): Completable {
+    override fun addProductIntoBasket(product: Product, user: User): Completable {
         return Completable.create { emitter ->
             val amount = basketDao.getProductAmountById(product.id.toLong())
             if (amount != null) {
                 basketDao.updateProductAmount(
                     product.id.toLong(),
                     amount + 1,
-                    1 // TODO setting current user id
+                    user.id
                 )
             } else {
                 basketDao.insertProduct(
@@ -57,7 +58,7 @@ class MenuRepositoryImpl
                 basketDao.insertItemIntoBasket(
                     BasketDB(
                         amount = 1,
-                        ownerId = 1, // TODO setting current user id
+                        ownerId = user.id,
                         productId = product.id.toLong()
                     )
                 )
@@ -66,7 +67,7 @@ class MenuRepositoryImpl
         }
     }
 
-    override fun removeProductFromBasket(product: Product): Completable {
+    override fun removeProductFromBasket(product: Product, user: User): Completable {
         return Completable.create { emitter ->
             val amount = basketDao.getProductAmountById(product.id.toLong())
             if (amount != null) {
@@ -74,7 +75,7 @@ class MenuRepositoryImpl
                     basketDao.delete(
                         BasketDB(
                             amount = 1,
-                            ownerId = 1,
+                            ownerId = user.id,
                             productId = product.id.toLong()
                         )
                     )
@@ -82,7 +83,7 @@ class MenuRepositoryImpl
                     basketDao.updateProductAmount(
                         product.id.toLong(),
                         amount - 1,
-                        1 // TODO setting current user id
+                        user.id
                     )
                 }
             }
