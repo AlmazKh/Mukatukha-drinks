@@ -63,7 +63,6 @@ class CafeListFragment : BaseFragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.toollbar_with_search, menu)
         val searchView = menu.findItem(R.id.action_search).actionView as SearchView
-//        searchView.imeOptions = EditorInfo.IME_ACTION_DONE
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -73,7 +72,6 @@ class CafeListFragment : BaseFragment() {
                 cafeAdapter.filter.filter(newText)
                 return false
             }
-
         })
     }
 
@@ -96,7 +94,7 @@ class CafeListFragment : BaseFragment() {
         viewModel.cafeListLiveData.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it.data != null) {
-                    cafeAdapter.submitList(it.data)
+                    cafeAdapter.submitList(it.data.toMutableList())
                     rv_cafes.adapter = cafeAdapter
                 }
                 if (it.error != null) {

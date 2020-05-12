@@ -18,7 +18,7 @@ class CafeAdapter (
     private val cabinetLambda: (Cafe) -> Unit
 ) : ListAdapter<Cafe, CafeAdapter.CafeViewHolder>(CafeDiffCallback()), Filterable {
 
-    private var filteredList = currentList
+    private var filteredList: MutableList<Cafe> = mutableListOf()
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CafeViewHolder {
         val inflater = LayoutInflater.from(p0.context)
@@ -30,6 +30,11 @@ class CafeAdapter (
         holder.itemView.setOnClickListener {
             cabinetLambda.invoke(filteredList[position])
         }
+    }
+
+    override fun submitList(list: MutableList<Cafe>?) {
+        super.submitList(list)
+        filteredList = list!!
     }
 
     override fun getItemCount(): Int {
