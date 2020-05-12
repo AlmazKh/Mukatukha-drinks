@@ -6,7 +6,7 @@ import io.reactivex.Completable
 import io.reactivex.Single
 
 interface MenuRepository {
-    fun getProductList(productCategory: ProductCategory, withMilk: Boolean): Single<List<Product>>
+    fun getProductList(cafeId: String, productCategory: ProductCategory, withMilk: Boolean): Single<List<Product>>
     fun addProductIntoBasket(product: Product): Completable
     fun removeProductFromBasket(product: Product): Completable
 }

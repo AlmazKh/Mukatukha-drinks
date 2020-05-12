@@ -4,6 +4,9 @@ import com.almaz.mukatukha_drinks.core.interfaces.MenuRepository
 import com.almaz.mukatukha_drinks.core.model.Product
 import com.almaz.mukatukha_drinks.core.model.ProductCategory
 import com.almaz.mukatukha_drinks.core.model.db.BasketDB
+import com.almaz.mukatukha_drinks.core.model.db.ProductDB
+import com.almaz.mukatukha_drinks.core.model.remote.ProductRemote
+import com.almaz.mukatukha_drinks.data.MukatukhaAPI
 import com.almaz.mukatukha_drinks.data.db.BasketDao
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -11,103 +14,25 @@ import javax.inject.Inject
 
 class MenuRepositoryImpl
 @Inject constructor(
-    private val basketDao: BasketDao
+    private val basketDao: BasketDao,
+    private val api: MukatukhaAPI
 ) : MenuRepository {
 
-    override fun getProductList(productCategory: ProductCategory, withMilk: Boolean): Single<List<Product>> {
-        return when(productCategory){
-            ProductCategory.COFFEE -> {
-                if (withMilk) {
-                    Single.just(listOf(
-                        Product(
-                            "1",
-                            "Латте",
-                            "100 руб.",
-                            "0.3 л",
-                            ProductCategory.COFFEE,
-                            true,
-                            "Some text with description"
-                        ),
-                        Product(
-                            "2",
-                            "Капучино",
-                            "150 руб.",
-                            "0.5 л",
-                            ProductCategory.COFFEE,
-                            true,
-                            "Some text with other description in two lines may be"
-                        )
-                    ))
-                } else {
-                    Single.just(listOf(
-                        Product(
-                            "3",
-                            "Американо",
-                            "100 руб.",
-                            "0.3 л",
-                            ProductCategory.COFFEE,
-                            false,
-                            "Some text with description"
-                        ),
-                        Product(
-                            "4",
-                            "Эспрессо",
-                            "150 руб.",
-                            "0.5 л",
-                            ProductCategory.COFFEE,
-                            false,
-                            "Some text with other description in two lines may be"
-                        )
-                    ))
+    override fun getProductList(
+        cafeId: String,
+        productCategory: ProductCategory,
+        withMilk: Boolean
+    ): Single<List<Product>> {
+        return Single.fromObservable(
+            api.getCafeMenu(
+                cafeId,
+                productCategory,
+                withMilk
+            )
+                .map {
+                    mapRemoteMenuToLocal(it)
                 }
-
-            }
-            ProductCategory.OTHER_DRINKS -> {
-                if (withMilk) {
-                    Single.just(listOf(
-                        Product(
-                            "5",
-                            "Молочный коктейль",
-                            "190 руб.",
-                            "0.3 л",
-                            ProductCategory.OTHER_DRINKS,
-                            true,
-                            "Some text with description"
-                        ),
-                        Product(
-                            "6",
-                            "Чай с молоком",
-                            "150 руб.",
-                            "0.5 л",
-                            ProductCategory.OTHER_DRINKS,
-                            true,
-                            "Some text with other description in two lines may be"
-                        )
-                    ))
-                } else {
-                    Single.just(listOf(
-                        Product(
-                            "7",
-                            "Апельсиновый сок",
-                            "500 руб.",
-                            "0.5 л",
-                            ProductCategory.OTHER_DRINKS,
-                            false,
-                            "Some text with description"
-                        ),
-                        Product(
-                            "8",
-                            "Морковный фреш",
-                            "250 руб.",
-                            "0.5 л",
-                            ProductCategory.OTHER_DRINKS,
-                            false,
-                            "Some text with other description in two lines may be"
-                        )
-                    ))
-                }
-            }
-        }
+        )
     }
 
     override fun addProductIntoBasket(product: Product): Completable {
@@ -120,11 +45,20 @@ class MenuRepositoryImpl
                     1 // TODO setting current user id
                 )
             } else {
+                basketDao.insertProduct(
+                    ProductDB(
+                        id = product.id.toLong(),
+                        name = product.name,
+                        price = product.price,
+                        volume = product.volume,
+                        otherDetails = product.otherDetails
+                    )
+                )
                 basketDao.insertItemIntoBasket(
                     BasketDB(
-                        productId = product.id.toLong(),
                         amount = 1,
-                        ownerId = 1 // TODO setting current user id
+                        ownerId = 1, // TODO setting current user id
+                        productId = product.id.toLong()
                     )
                 )
             }
@@ -139,9 +73,9 @@ class MenuRepositoryImpl
                 if (amount == 1) {
                     basketDao.delete(
                         BasketDB(
-                            productId = product.id.toLong(),
                             amount = 1,
-                            ownerId = 1
+                            ownerId = 1,
+                            productId = product.id.toLong()
                         )
                     )
                 } else {
@@ -154,5 +88,24 @@ class MenuRepositoryImpl
             }
             emitter.onComplete()
         }
+    }
+
+    private fun mapRemoteMenuToLocal(remote: List<ProductRemote>): List<Product> {
+        val list = mutableListOf<Product>()
+        for (product in remote) {
+            list.add(
+                Product(
+                    product.id.toString(),
+                    product.name,
+                    product.price,
+                    "0.5 л.",
+                    ProductCategory.valueOf(product.category),
+                    product.withMilk,
+                    product.otherDetails
+                )
+            )
+        }
+
+        return list
     }
 }

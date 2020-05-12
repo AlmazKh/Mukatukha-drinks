@@ -13,8 +13,8 @@ class MenuInteractor
     private val menuRepository: MenuRepository
 ){
 
-    fun getProductList(productCategory: ProductCategory, withMilk: Boolean): Single<List<Product>> =
-        menuRepository.getProductList(productCategory, withMilk)
+    fun getProductList(cafeId: String, productCategory: ProductCategory, withMilk: Boolean): Single<List<Product>> =
+        menuRepository.getProductList(cafeId, productCategory, withMilk)
             .subscribeOn(Schedulers.io())
 
     fun addProductIntoBasket(product: Product): Completable =
