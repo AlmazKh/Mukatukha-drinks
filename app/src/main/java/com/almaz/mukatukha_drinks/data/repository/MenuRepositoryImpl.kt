@@ -58,7 +58,7 @@ class MenuRepositoryImpl
                 basketDao.insertItemIntoBasket(
                     BasketDB(
                         amount = 1,
-                        ownerId = user.id,
+                        ownerId = user.id!!,
                         productId = product.id.toLong()
                     )
                 )
@@ -75,7 +75,7 @@ class MenuRepositoryImpl
                     basketDao.delete(
                         BasketDB(
                             amount = 1,
-                            ownerId = user.id,
+                            ownerId = user.id!!,
                             productId = product.id.toLong()
                         )
                     )

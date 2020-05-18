@@ -16,6 +16,7 @@ import com.google.firebase.auth.PhoneAuthProvider
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -47,10 +48,16 @@ class UserRepositoryImpl
                             emitter.onError(task.exception ?: Exception(""))
                         }
                     }
-                }
-                /*.doOnComplete {
-                    TODO adding user into DB
-                }*/
+        }
+            .doOnComplete {
+                searchUserInDb(null, acct.email)
+                    .observeOn(Schedulers.io())
+                    .subscribe({
+                        if (!it) {
+                            addUserToDb(acct.displayName, acct.email, null)
+                        }
+                    }, {})
+            }
     }
 
     override fun loginWithPhone(
@@ -70,16 +77,15 @@ class UserRepositoryImpl
                         }
                     }
                 }
-                    /* TODO: add into DB if new user
                     .doOnComplete {
-                        searchUserInDb(null, phone)
+                        searchUserInDb(phone, null)
                             .observeOn(Schedulers.io())
                             .subscribe({
                                 if (!it) {
-                                    addUserToDb(userName, null, phone, null)
+                                    addUserToDb(userName, null, phone)
                                 }
                             }, {})
-                    }*/
+                    }
             }
     }
 
@@ -121,37 +127,67 @@ class UserRepositoryImpl
     }
 
     override fun getCurrentUser(): Single<User> {
-        return Single.create { emitter ->
-            val firebaseUser = firebaseAuth.currentUser
-            if (firebaseUser != null) {
-                if (firebaseUser.email != null) {
-                    api.getUserByEmail(firebaseUser.email!!)
-                        .map {
-                            emitter.onSuccess(mapRemoteUserToLocal(it))
-                        }
-                } else {
-                    api.getUserByPhone(firebaseUser.phoneNumber!!)
-                        .map {
-                            emitter.onSuccess(mapRemoteUserToLocal(it))
-                        }
-                }
+        val firebaseUser = firebaseAuth.currentUser
+        if (firebaseUser != null) {
+            return if (firebaseUser.email != null) {
+                Single.fromObservable(api.getUserByEmail(firebaseUser.email!!)
+                    .map {
+                        mapRemoteUserToLocal(it)
+                    })
             } else {
-                emitter.onSuccess(
+                Single.fromObservable(api.getUserByPhone(firebaseUser.phoneNumber!!)
+                    .map {
+                        mapRemoteUserToLocal(it)
+                    })
+            }
+            } else {
+            return Single.just(
                     User(
+                        id = -1,
                         name = null,
                         phoneNumber = null,
                         email = null
                     )
                 )
             }
+    }
+
+    private fun searchUserInDb(phone: String?, email: String?): Single<Boolean> {
+        if (phone == null) {
+            return Single.fromObservable(api.getUserByEmail(email!!)
+                .map {
+                    when (it) {
+                        null -> false
+                        else -> true
+                    }
+                })
+        } else {
+            return Single.fromObservable(api.getUserByPhone(phone)
+                .map {
+                    when (it) {
+                        null -> false
+                        else -> true
+                    }
+                })
         }
+    }
+
+    private fun addUserToDb(name: String?, email: String?, phone: String?) {
+        api.addUserIntoDB(
+            User(
+                id = null,
+                name = name,
+                phoneNumber = phone,
+                email = email
+            )
+        )
     }
 
     private fun mapRemoteUserToLocal(remote: UserRemote): User =
         User(
-            remote.id,
+            remote.id.toLong(),
             remote.name,
-            remote.phoneNumber,
+            remote.phone,
             remote.email,
             remote.discountPoints
         )

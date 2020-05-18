@@ -23,15 +23,21 @@ interface MukatukhaAPI {
         @Query("withMilk") withMilk: Boolean
     ): Observable<List<ProductRemote>>
 
-    @POST
+    @POST("/makeOrder")
     fun makeOrder(@Body orderRequest: OrderRequest): Observable<OrderRemote>
 
-    @GET("order/active")
+    @GET("/order/active")
     fun checkHasActiveOrder(@Body user: User): Single<Boolean>
 
-    @GET("/user")
-    fun getUserByEmail(@Query("email") email: String): Single<UserRemote>
+    /*@GET("/emailuser/{email}")
+    fun getUserByEmail(@Path("email") email: String): Single<UserRemote?>
+*/
+    @GET("/user/email")
+    fun getUserByEmail(@Query("email") email: String): Observable<UserRemote?>
 
-    @GET("/user")
-    fun getUserByPhone(@Query("phone") phone: String): Single<UserRemote>
+    @GET("/user/phone")
+    fun getUserByPhone(@Path("phone") phone: String): Observable<UserRemote?>
+
+    @POST("/register")
+    fun addUserIntoDB(@Body user: User)
 }

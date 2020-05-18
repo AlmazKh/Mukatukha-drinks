@@ -100,7 +100,7 @@ class ProfileFragment : BaseFragment() {
             it?.let {
                 if (it.data != null) {
                     tv_user_name.text = it.data.name
-                    tv_points_title.text = it.data.discountPoints.toString()
+                    tv_points_title.text = "У вас ${it.data.discountPoints}  баллов"
                 }
                 if (it.error != null) {
                     showSnackbar(getString(R.string.snackbar_error_message))

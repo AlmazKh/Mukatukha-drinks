@@ -24,7 +24,7 @@ interface BasketDao {
     fun insertItemIntoBasket(item: BasketDB)
 
     @Query("UPDATE basket SET amount = :amount WHERE product_id = :productId AND owner_id = :ownerId")
-    fun updateProductAmount(productId: Long, amount: Int, ownerId: Long)
+    fun updateProductAmount(productId: Long, amount: Int, ownerId: Long?)
 
     @Update
     fun update(item: BasketDB)
