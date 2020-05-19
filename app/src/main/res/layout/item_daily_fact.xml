@@ -14,9 +14,9 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_product_image"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/default_cap_of_coffee"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/def_fact_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,8 +30,11 @@
             android:paddingStart="@dimen/spacing_small_8"
             android:paddingEnd="@dimen/spacing_small_8"
             android:text="Some name"
+            android:layout_marginBottom="@dimen/spacing_small_8"
+            android:textSize="@dimen/font_large_24"
+            android:textColor="@android:color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_product_image" />
+            app:layout_constraintBottom_toBottomOf="@id/iv_product_image" />
 
         <TextView
             android:id="@+id/tv_fact_description"

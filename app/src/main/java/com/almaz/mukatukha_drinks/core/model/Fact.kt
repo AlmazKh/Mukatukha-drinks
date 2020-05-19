@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Fact(
-    val id: String,
+    val id: Long,
     val title: String,
     val description: String
 ): Parcelable

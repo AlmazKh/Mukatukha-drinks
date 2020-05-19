@@ -3,10 +3,7 @@ package com.almaz.mukatukha_drinks.data
 import com.almaz.mukatukha_drinks.core.model.OrderRequest
 import com.almaz.mukatukha_drinks.core.model.ProductCategory
 import com.almaz.mukatukha_drinks.core.model.User
-import com.almaz.mukatukha_drinks.core.model.remote.CafeRemote
-import com.almaz.mukatukha_drinks.core.model.remote.OrderRemote
-import com.almaz.mukatukha_drinks.core.model.remote.ProductRemote
-import com.almaz.mukatukha_drinks.core.model.remote.UserRemote
+import com.almaz.mukatukha_drinks.core.model.remote.*
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -42,4 +39,7 @@ interface MukatukhaAPI {
 
     @GET("/users/{id}")
     fun getUserById(@Query("id") userId: Long): Observable<UserRemote?>
+
+    @GET("/info")
+    fun getFacts(): Observable<List<FactRemote>>
 }
