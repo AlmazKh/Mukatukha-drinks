@@ -118,6 +118,14 @@ class BasketFragment : BaseFragment() {
 
             }
 
+        btn_use_promocode.setOnClickListener {
+            if(et_promocode.text.toString().trim() == "MUKA2020") {
+                tv_discount_title.visibility = View.VISIBLE
+                tv_discount_value.visibility =View.VISIBLE
+                tv_final_cost_value.text = (tv_final_cost_value.text.toString().toDouble() - 120.0).toString()
+            }
+        }
+
         observeShowLoadingLiveData()
         observeProductListLiveData()
         observeProductClickLiveData()
@@ -161,8 +169,10 @@ class BasketFragment : BaseFragment() {
         viewModel.productListLiveData.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it.data != null) {
-                    basketProductAdapter.submitList(it.data)
+                    basketProductAdapter.submitList(it.data.basket)
                     rv_basket_product.adapter = basketProductAdapter
+                    tv_cost_value.text = it.data.totalSum.toString()
+                    tv_final_cost_value.text = it.data.totalSum.toString()
                 }
                 if (it.error != null) {
                     showSnackbar(getString(R.string.snackbar_error_message))

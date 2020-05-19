@@ -3,6 +3,7 @@ package com.almaz.mukatukha_drinks.core.interactors
 import com.almaz.mukatukha_drinks.core.interfaces.BasketRepository
 import com.almaz.mukatukha_drinks.core.interfaces.UserRepository
 import com.almaz.mukatukha_drinks.core.model.Basket
+import com.almaz.mukatukha_drinks.core.model.BasketOrderInfo
 import com.almaz.mukatukha_drinks.core.model.Order
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -14,7 +15,7 @@ class BasketInteractor
     private val userRepository: UserRepository
 ) {
 
-    fun updateBasketProductList(): Single<List<Basket>> =
+    fun updateBasketProductList(): Single<BasketOrderInfo> =
         basketRepository.getBasketProductList()
             .subscribeOn(Schedulers.io())
 
@@ -31,7 +32,7 @@ class BasketInteractor
                             phoneNumber,
                             paymentMethod,
                             promocode,
-                            basket,
+                            basket.basket,
                             it
                         )
                     }

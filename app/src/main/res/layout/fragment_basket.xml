@@ -83,6 +83,7 @@
             android:layout_marginStart="@dimen/spacing_normal_16"
             android:layout_marginTop="@dimen/spacing_small_8"
             android:text="Скидка"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_cost_title" />
 
@@ -94,6 +95,7 @@
             android:layout_marginEnd="@dimen/spacing_normal_16"
             android:layout_marginTop="@dimen/spacing_small_8"
             android:text="-120"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_discount_title"
             app:layout_constraintBottom_toBottomOf="@id/tv_discount_title"/>
@@ -116,7 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing_normal_16"
             android:layout_marginTop="@dimen/spacing_small_8"
-            android:text="600"
+            android:text="720"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_final_cost_title"
             app:layout_constraintBottom_toBottomOf="@id/tv_final_cost_title" />
@@ -199,6 +201,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_use_promocode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Активировать"
+            android:textColor="@color/colorPrimary"
+            android:backgroundTint="#4F391C"
+            app:layout_constraintTop_toTopOf="@id/text_input_layout_promocode"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/spacing_large_24"
+            app:layout_constraintBottom_toBottomOf="@id/text_input_layout_promocode"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_make_order"

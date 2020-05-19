@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.almaz.mukatukha_drinks.core.interactors.BasketInteractor
 import com.almaz.mukatukha_drinks.core.interactors.MenuInteractor
 import com.almaz.mukatukha_drinks.core.model.Basket
+import com.almaz.mukatukha_drinks.core.model.BasketOrderInfo
 import com.almaz.mukatukha_drinks.core.model.Order
 import com.almaz.mukatukha_drinks.core.model.Product
 import com.almaz.mukatukha_drinks.ui.base.BaseViewModel
@@ -20,7 +21,7 @@ class BasketViewModel
 
     val basketState = MutableLiveData<BasketState>()
     val orderStatusLiveData = MutableLiveData<Response<Order>>()
-    val productListLiveData = MutableLiveData<Response<List<Basket>>>()
+    val productListLiveData = MutableLiveData<Response<BasketOrderInfo>>()
     val productClickLiveData = MutableLiveData<Response<Product>>()
 
     fun updateBasketProductList() {

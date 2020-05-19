@@ -15,10 +15,16 @@ class BasketRepositoryImpl
     private val api: MukatukhaAPI
 ) : BasketRepository {
 
-    override fun getBasketProductList(): Single<List<Basket>> {
+    override fun getBasketProductList(): Single<BasketOrderInfo> {
         return basketDao.getItemsFromBasket().map {
             mapBasketAndProductToLocalBasket(it)
         }
+            .map {
+                BasketOrderInfo(
+                    countTotalCost(it),
+                    it
+                )
+            }
     }
 
     /*override fun makeOrder(
@@ -80,7 +86,7 @@ class BasketRepositoryImpl
                                 "Some text with description"
                             ) to 1
                         ),
-                        totalCost = 342.0
+                totalCost = 720.0
 
             )
         )

@@ -49,7 +49,7 @@ class UserRepositoryImpl
                         }
                     }
         }
-            .doOnComplete {
+            /*.doOnComplete {
                 searchUserInDb(null, acct.email)
                     .observeOn(Schedulers.io())
                     .subscribe({
@@ -57,7 +57,7 @@ class UserRepositoryImpl
                             addUserToDb(acct.displayName, acct.email, null)
                         }
                     }, {})
-            }
+            }*/
     }
 
     override fun loginWithPhone(
@@ -77,7 +77,7 @@ class UserRepositoryImpl
                         }
                     }
                 }
-                    .doOnComplete {
+                    /*.doOnComplete {
                         searchUserInDb(phone, null)
                             .observeOn(Schedulers.io())
                             .subscribe({
@@ -85,7 +85,7 @@ class UserRepositoryImpl
                                     addUserToDb(userName, null, phone)
                                 }
                             }, {})
-                    }
+                    }*/
             }
     }
 
