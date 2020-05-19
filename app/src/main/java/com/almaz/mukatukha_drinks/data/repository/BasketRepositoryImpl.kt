@@ -60,7 +60,26 @@ class BasketRepositoryImpl
                         secretCode = "F-829",
                         time = "7:29",
                     cafe = Cafe("1", "Skuratov Coffee Roasters", "1", "1", "1", "1"),
-                        products = mapOf<Product, Int>(),
+                        products = mapOf<Product, Int>(
+                            Product(
+                                "1",
+                                "Американо",
+                                100.0,
+                                "0.3 л",
+                                ProductCategory.COFFEE,
+                                false,
+                                "Some text with description"
+                            )to 2,
+                            Product(
+                                "1",
+                                "Капучино",
+                                100.0,
+                                "0.3 л",
+                                ProductCategory.COFFEE,
+                                false,
+                                "Some text with description"
+                            ) to 1
+                        ),
                         totalCost = 342.0
 
             )

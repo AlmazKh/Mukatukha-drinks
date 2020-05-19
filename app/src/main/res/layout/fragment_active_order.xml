@@ -64,11 +64,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_time_title" />
 
-        <!--<ExpandableListView
+        <ExpandableListView
             android:id="@+id/expandable_list_of_products"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_time"
-            android:layout_marginTop="@dimen/spacing_normal_16"/>-->
+            android:layout_marginTop="@dimen/spacing_normal_16"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
