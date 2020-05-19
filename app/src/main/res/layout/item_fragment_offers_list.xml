@@ -8,9 +8,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingStart="@dimen/spacing_small_8"
-        android:paddingEnd="@dimen/spacing_small_8">
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_offer_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/def_offer_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/tv_cafe_name"
@@ -18,9 +27,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_normal_16"
-            android:text="Название кофейни"
+            android:paddingStart="@dimen/spacing_small_8"
+            android:paddingEnd="@dimen/spacing_small_8"
+            android:text="Some name"
+            android:layout_marginBottom="@dimen/spacing_small_8"
+            android:textSize="@dimen/font_large_24"
+            android:textColor="@android:color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@id/iv_offer_image" />
 
         <TextView
             android:id="@+id/tv_cafe_address"
@@ -29,6 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_normal_16"
             android:text="Адрес кофейни"
+            android:paddingStart="@dimen/spacing_small_8"
+            android:paddingEnd="@dimen/spacing_small_8"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_cafe_name" />
 
@@ -37,6 +53,8 @@
             style="@style/BaseText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingStart="@dimen/spacing_small_8"
+            android:paddingEnd="@dimen/spacing_small_8"
             android:layout_marginTop="@dimen/spacing_normal_16"
             android:layout_marginBottom="@dimen/font_normal_16"
             android:text="Скидка 20% по промокоду  MUKA2020TUKHA"

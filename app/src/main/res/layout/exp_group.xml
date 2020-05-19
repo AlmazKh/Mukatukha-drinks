@@ -9,6 +9,6 @@
         android:layout_height="wrap_content"
         style="@style/TitleText"
         android:paddingTop="10dp"
-        android:paddingStart="@dimen/spacing_small_8"
+        android:paddingStart="@dimen/spacing_normal_16"
         android:paddingBottom="10dp" />
 </LinearLayout>
