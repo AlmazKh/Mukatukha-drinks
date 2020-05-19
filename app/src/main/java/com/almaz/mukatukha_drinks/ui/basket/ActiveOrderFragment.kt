@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ExpandableListView
+import android.widget.LinearLayout
 import android.widget.SimpleExpandableListAdapter
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -57,7 +59,20 @@ class ActiveOrderFragment : BaseFragment() {
         setArrowToolbarVisibility(false)
         setToolbarTitle("Ваш заказ")
 
+        btn_secret_code_description.setOnClickListener {
+            showSecretCodeDescriptionDialog()
+        }
         observeOrderStatusLiveData()
+    }
+
+    private fun showSecretCodeDescriptionDialog() {
+        val builder = AlertDialog.Builder(rootActivity)
+        with(builder) {
+            setTitle("Секретный код заказа")
+            setMessage("Назовите этот код на кассе для получения вашего заказа")
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
     private fun observeOrderStatusLiveData() =
