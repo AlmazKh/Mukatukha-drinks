@@ -12,7 +12,8 @@ interface BasketRepository {
         phoneNumber: String,
         paymentMethod: String,
         promocode: String?,
-        basket: List<Basket>
+        basket: List<Basket>,
+        owner: User
     ): Single<Order>
     fun checkHasActiveOrder(user: User) :Single<Boolean>
     fun checkHasProductsInBasket() : Single<Boolean>

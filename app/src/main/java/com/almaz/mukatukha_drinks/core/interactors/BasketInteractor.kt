@@ -24,13 +24,17 @@ class BasketInteractor
         promocode: String?
     ): Single<Order> =
         basketRepository.getBasketProductList()
-            .flatMap {
-                basketRepository.makeOrder(
-                    phoneNumber,
-                    paymentMethod,
-                    promocode,
-                    it
-                )
+            .flatMap { basket ->
+                userRepository.getCurrentUser()
+                    .flatMap {
+                        basketRepository.makeOrder(
+                            phoneNumber,
+                            paymentMethod,
+                            promocode,
+                            basket,
+                            it
+                        )
+                    }
             }
             .subscribeOn(Schedulers.io())
 

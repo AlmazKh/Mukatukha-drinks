@@ -5,6 +5,7 @@ data class OrderRequest(
     val paymentMethod: String,
     val products: Map<Product, Int>,
     val totalCost: Double,
-    val ownerId: Long,
+    val cafe: Cafe,
+    val customer: User,
     val promocode: String? = null
 )

@@ -8,7 +8,6 @@ import com.almaz.mukatukha_drinks.core.model.remote.OrderRemote
 import com.almaz.mukatukha_drinks.core.model.remote.ProductRemote
 import com.almaz.mukatukha_drinks.core.model.remote.UserRemote
 import io.reactivex.Observable
-import io.reactivex.Single
 import retrofit2.http.*
 
 interface MukatukhaAPI {
@@ -26,8 +25,8 @@ interface MukatukhaAPI {
     @POST("/makeOrder")
     fun makeOrder(@Body orderRequest: OrderRequest): Observable<OrderRemote>
 
-    @GET("/order/active")
-    fun checkHasActiveOrder(@Body user: User): Single<Boolean>
+    @GET("/orders/list/{customerId}/active")
+    fun checkHasActiveOrder(@Path("customerId") userId: Long): Observable<Boolean>
 
     /*@GET("/emailuser/{email}")
     fun getUserByEmail(@Path("email") email: String): Single<UserRemote?>
@@ -40,4 +39,7 @@ interface MukatukhaAPI {
 
     @POST("/register")
     fun addUserIntoDB(@Body user: User)
+
+    @GET("/users/{id}")
+    fun getUserById(@Query("id") userId: Long): Observable<UserRemote?>
 }

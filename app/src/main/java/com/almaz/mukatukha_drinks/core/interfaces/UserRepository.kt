@@ -19,4 +19,5 @@ interface UserRepository {
     fun sendVerificationCode(phoneNumber: String): Maybe<String>
     fun logout(): Completable
     fun getCurrentUser(): Single<User>
+    fun getUserById(userId: Long): Single<User>
 }

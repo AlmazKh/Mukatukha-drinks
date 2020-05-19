@@ -21,11 +21,12 @@ class BasketRepositoryImpl
         }
     }
 
-    override fun makeOrder(
+    /*override fun makeOrder(
         phoneNumber: String,
         paymentMethod: String,
         promocode: String?,
-        basket: List<Basket>
+        basket: List<Basket>,
+        owner: User
     ): Single<Order> {
         return Single.fromObservable(
             api.makeOrder(
@@ -34,7 +35,8 @@ class BasketRepositoryImpl
                     paymentMethod = paymentMethod,
                     products = mapBasketToProductAmountMap(basket),
                     totalCost = countTotalCost(basket),
-                    ownerId = basket.first().ownerId,
+                    cafe = Cafe("1", "1", "1", "1", "1", "1"),
+                    customer = owner,
                     promocode = promocode
                 )
             )
@@ -43,10 +45,31 @@ class BasketRepositoryImpl
                 mapResponseOrderToLocal(it)
             }
 
+    }*/
+
+    override fun makeOrder(
+        phoneNumber: String,
+        paymentMethod: String,
+        promocode: String?,
+        basket: List<Basket>,
+        owner: User
+    ): Single<Order> {
+        return Single.just(
+            Order(
+                id = "1",
+                        secretCode = "F-829",
+                        time = "7:29",
+                    cafe = Cafe("1", "Skuratov Coffee Roasters", "1", "1", "1", "1"),
+                        products = mapOf<Product, Int>(),
+                        totalCost = 342.0
+
+            )
+        )
+
     }
 
     override fun checkHasActiveOrder(user: User): Single<Boolean> {
-        return api.checkHasActiveOrder(user)
+        return Single.fromObservable(api.checkHasActiveOrder(user.id!!))
     }
 
     override fun checkHasProductsInBasket(): Single<Boolean> {
@@ -58,12 +81,12 @@ class BasketRepositoryImpl
 
     private fun mapResponseOrderToLocal(order: OrderRemote): Order =
         Order(
-            order.id,
+            order.id.toString(),
             order.secretCode,
-            order.time,
-            order.cafe,
-            order.products,
-            order.totalCost
+            order.buyTime,
+            Cafe("1", "1", "1", "1", "1", "1"),
+            mapOf(),
+            order.totalSum
         )
 
     private fun mapBasketToProductAmountMap(basket: List<Basket>): Map<Product, Int> {

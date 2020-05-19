@@ -152,6 +152,15 @@ class UserRepositoryImpl
             }
     }
 
+    override fun getUserById(userId: Long): Single<User> {
+        return Single.fromObservable(
+            api.getUserById(userId)
+        )
+            .map {
+                mapRemoteUserToLocal(it)
+            }
+    }
+
     private fun searchUserInDb(phone: String?, email: String?): Single<Boolean> {
         if (phone == null) {
             return Single.fromObservable(api.getUserByEmail(email!!)
